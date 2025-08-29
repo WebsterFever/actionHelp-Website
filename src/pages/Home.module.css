@@ -1,0 +1,944 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.home {
+  background-color: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+
+
+}
+
+/* HERO SECTION */
+.hero {
+  padding: 5rem 2rem 3rem;
+  background-color: var(--background);
+
+}
+
+
+.heroContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 70px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  margin-left: 40px;
+
+}
+
+.heroText {
+  flex: 1;
+  min-width: 280px;
+}
+
+.wel {
+  font-family: 'Righteous', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  animation: colorCycle 5s infinite ease-in-out;
+}
+
+
+
+/* 🎨 Define keyframes to cycle through colors */
+@keyframes colorCycle {
+  0% {
+    color: #e74c3c;
+    /* Red */
+  }
+
+  25% {
+    color: #f39c12;
+    /* Orange */
+  }
+
+  50% {
+    color: #27ae60;
+    /* Green */
+  }
+
+  75% {
+    color: #2980b9;
+    /* Blue */
+  }
+
+  100% {
+    color: #8e44ad;
+    /* Purple */
+  }
+}
+
+.heroText p {
+
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.heroText button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.heroText button:hover {
+  background-color: var(--primary-hover);
+}
+
+.heroImage {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.aboutMission {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+
+}
+
+.about,
+.mission {
+  flex: 1;
+  min-width: 300px;
+}
+
+.subTitle {
+  font-size: 0.8rem;
+  color: var(--primary);
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.about h2,
+.mission h2 {
+  color: var(--text);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.about p,
+.mission p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+
+  word-wrap: break-word;
+  /* Ensure long words wrap */
+  overflow-wrap: break-word;
+  /* Newer spec-compliant version */
+  white-space: normal;
+  /* Allow multiline text */
+}
+
+
+.readMore {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.readMore:hover {
+  color: var(--primary-hover);
+}
+
+.serviceList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.serviceCard {
+  background-color: var(--card);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+}
+
+.serviceImage {
+  width: 100%;
+  height: auto;
+  max-height: 140px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
+
+
+/*****?*/
+
+.serviceWrapper {
+  overflow-x: hidden;
+  overflow-y: hidden; /* ✅ Prevents vertical scrollbar */
+  width: 100%;
+}
+
+.serviceScroller {
+  display: flex;
+  gap: 1.5rem;
+  animation: scrollLoop 40s linear infinite;
+  width: max-content;
+  padding-bottom: 12px;
+}
+
+/* When animation is stopped */
+.manualScroll {
+  animation: none !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important; /* ✅ Ensures vertical scrollbar is hidden */
+  width: 100% !important;
+  scrollbar-width: thin;
+}
+
+.manualScroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.manualScroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 8px;
+}
+
+.manualScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+.serviceCard {
+  min-width: 250px;
+  background-color: var(--card);
+  border-radius: 10px;
+  text-align: center;
+  padding: 1rem;
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.serviceCard:hover {
+  transform: scale(1.05);
+}
+
+.serviceImage {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.heroContentWithAside {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.heroMainContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  background-color: var(--card);
+  width: fit-content;
+  text-align: center;
+  padding-right: 20px;
+  padding-bottom:20px;
+  border-radius: 12px;
+
+  display: block;
+  width: 100%;
+  text-align: center;
+
+ animation: fadeInUp 1s ease forwards, float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
+
+  
+  /* Adjust opacity here */
+
+
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* Border Glow Animation */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+  }
+}
+
+
+.testimonials {
+  padding: 3rem 2rem;
+
+  color: var(--text);
+  text-align: center;
+
+}
+
+.testimonialWrapperInHero {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.heroMainContent {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  /* Responsive fallback */
+
+  padding: 2rem 1rem;
+  margin-top: -30px;
+
+
+}
+
+.heroTextBlock {
+  flex: 1;
+  min-width: 300px;
+  max-width: 50%;
+}
+
+.heroImage {
+  flex: 1;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.testimonials {
+  margin-top: 2rem;
+}
+
+.ser {
+  color: var(--text);
+  text-align: center;
+}
+
+.cardContainer {
+  perspective: 1000px;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.flipCard {
+  width: 250px;
+  height: 280px;
+  position: relative;
+  flex-shrink: 0;
+  margin: 0 1rem;
+  /* ✅ Add spacing between cards */
+}
+
+
+.flipCardInner {
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+
+.flipCard:hover .flipCardInner {
+  transform: rotateY(180deg);
+}
+
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  backface-visibility: hidden;
+  background-color: var(--card);
+  color: var(--text);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.flipCardFront img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.flipCardBack {
+  transform: rotateY(180deg);
+  text-align: center;
+}
+
+/* ✅ Mobile: show Blog & Services side-by-side */
+@media (max-width: 767px) {
+  .heroContentWithAside {
+    display: flex;
+    flex-direction: column;
+    /* stack them vertically */
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 0;
+    /* ✅ Remove space below */
+    padding-bottom: 0;
+  }
+
+  .aside {
+    width: 100%;
+    background-color: var(--background);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0;
+  }
+
+  .aside .section {
+    background-color: var(--card);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0;
+  }
+
+  .aside .sectionTitle {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .aside ul {
+    display: none;
+  }
+
+  .aside .section.open ul {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .aside .section ul li {
+    margin: 0.5rem 0;
+  }
+
+  .heroMainContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1.5rem;
+    text-align: center;
+
+
+  }
+
+  .heroTextBlock {
+    
+    padding-top: 1px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+
+
+
+  .home {
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+}
+
+/* ===== Modal Overlay: FULL BLACK OR WHITE depending on theme ===== */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--overlay-bg, #000); /* use solid fallback if variable not set */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+/* Light/dark mode support */
+:root {
+  --overlay-bg: #000; /* fallback: black overlay for dark mode */
+}
+[data-theme="light"] {
+  --overlay-bg: #fff;
+}
+
+/* ===== Modal Box (with white or dark background) ===== */
+.modal {
+  background-color: var(--card, #ffffff);
+  color: var(--text, #000000);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  max-height: 85vh;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode modal styles */
+:root[data-theme="dark"] .modal {
+  background-color: #1f1f1f;
+  color: #f9f9f9;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Modal Title ===== */
+.modal h2 {
+  font-size: 1.7rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--primary, #0d6efd);
+  padding-bottom: 0.5rem;
+}
+
+/* ===== Director Card ===== */
+.director {
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  background-color: var(--section-bg, #f0f0f0);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+:root[data-theme="dark"] .director {
+  background-color: #2b2b2b;
+}
+
+.director strong {
+  display: block;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.director span {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* ===== Close Button ===== */
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.3rem;
+  border: none;
+  background-color: var(--primary, #0d6efd);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.closeButton:hover {
+  background-color: #0951c5;
+}
+
+/* ===== Scrollbar for modal content ===== */
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+.modal::-webkit-scrollbar-thumb {
+  background-color: var(--primary, #0d6efd);
+  border-radius: 6px;
+}
+
+/* ===== Mobile Adjustments ===== */
+@media (max-width: 767px) {
+  .modal {
+    max-width: 90vw;
+    padding: 1.2rem;
+  }
+
+  .modal h2 {
+    font-size: 1.5rem;
+  }
+
+  .closeButton {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.7rem;
+  }
+}
+
+/* ========== ✅ MODAL STYLES ========== */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75); /* slightly transparent dark */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.modalContent {
+  background-color: var(--background); /* support for dark/light */
+  color: var(--text); /* support for dark/light */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease-in-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalContent h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.modalContent ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.modalContent li {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.closeModal {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.closeModal:hover {
+  background-color: var(--primary-dark, #004080); /* fallback */
+}
+
+/* ========== ✅ READ MORE LINK ========== */
+.readMore {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.readMore:hover {
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .modalContent {
+    padding: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .modalContent h2 {
+    font-size: 1.3rem;
+  }
+}
+.leadershipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  justify-content: center;
+}
+
+/* Each card */
+.leadershipCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.leaderImg {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* Desktop: 2 cards per row */
+@media (min-width: 768px) {
+  .leadershipCard {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    text-align: left;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .leaderImg {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+
+  .leadershipCard div {
+    flex: 1;
+  }
+}
+
+.modalContent {
+  background: #1f2937;
+  color: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+.modalContent::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 10px;
+}
+.modalContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.leadershipList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leadershipItem {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 16px;
+  text-align: center;
+}
+
+.leaderImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.leaderName {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3b82f6;
+  margin: 5px 0;
+}
+
+.leaderRole {
+  font-style: italic;
+  color: #d1d5db;
+  margin-bottom: 10px;
+}
+
+.leaderText {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e5e7eb;
+}
+.donateBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+/* ===== iPad behaves like phone (≤ 1023px) ===== */
+@media (max-width: 1023px) {
+  /* Center containers and remove fixed offsets */
+  .heroContent { 
+    max-width: 900px;
+    margin: 0 auto;              /* kill margin-left: 40px effect */
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+
+  /* Phone layout for hero + aside on iPad too */
+  .heroContentWithAside {
+    display: flex;
+    flex-direction: column;      /* stack like phone */
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .heroMainContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;      /* stack text + image */
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    gap: 1.25rem;
+  }
+
+  .heroTextBlock {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .heroImage {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Keep sections single-column like phone */
+  .aboutMission {
+    display: block;
+    max-width: 900px;
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+  .about, .mission {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Services: keep grid as 1 column like phone (or 2 if you prefer) */
+  .serviceList {
+    grid-template-columns: 1fr;  /* same as phone */
+  }
+  /* If using the horizontal scroller, no change needed */
+
+  /* Testimonials section (matches phone look) */
+  .testimonials, .testimonialWrapper, .testimonialWrapperInHero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+  /* If your testimonials use a CSS grid class `.grid`, keep it 1 col */
+  .grid { grid-template-columns: 1fr !important; }
+
+  /* Optional: hide/compact the left sidebar on iPad like phone */
+  .aside { display: none; }
+}
+
+/* ===== Desktop breakpoint only (≥ 1024px) ===== */
+/* Your existing desktop styles can remain as-is;
+   the key is: do NOT introduce a tablet (768–1023) layout. */

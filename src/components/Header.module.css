@@ -1,0 +1,451 @@
+/* ✅ Modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap');
+
+/* ✅ Default font family */
+body {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* ✅ Headings with Jakarta Sans */
+h1, h2, h3, h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ========== HEADER STYLES ========== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: var(--text);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+  /* ★ Animated gradient background */
+  background: linear-gradient(-45deg, #4f4644, #47363c, #093849, #08362b);
+  background-size: 400% 400%;
+  animation:
+    slideDown 0.6s ease-in-out,
+    glowBorder 5s ease-in-out infinite,
+    gradientBG 15s ease infinite;
+}
+
+/* Slide-down animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Glowing border effect */
+@keyframes glowBorder {
+  0%, 100% {
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Gradient animation */
+@keyframes gradientBG {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Logo styles */
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--primary);
+}
+.logoImage {
+  width: 150px;
+  object-fit: contain;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+.logo:hover, .logo:focus, 
+.logoImage:hover, .logoImage:focus {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Navigation styles */
+.nav {
+  display: flex;
+  gap: 25px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.nav a,
+.nav .activeLink {
+  position: relative;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+.nav a::after,
+.nav .activeLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+.nav a:hover::after {
+  width: 100%;
+}
+.nav .activeLink::after {
+  width: 100%;
+}
+.nav .activeLink {
+  color: var(--primary);
+}
+
+/* Right side controls */
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.themeToggle {
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  transition: transform 0.3s ease;
+}
+.themeToggle:hover {
+  transform: scale(1.2);
+}
+.languageSelect {
+  background-color: var(--card);
+  color: var(--text);
+  border: 1px solid var(--primary);
+  padding: 8px 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.languageSelect:hover, .languageSelect:focus {
+  border-color: var(--primary);
+  background-color: var(--primary);
+  color: white;
+  outline: none;
+}
+.languageSelect option {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* ========== DESKTOP ========== */
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+  }
+  .rightControls {
+    display: flex;
+  }
+  .menuToggle,
+  .mobileRightGroup {
+    display: none;
+  }
+  .logoImage {
+    width: 150px;
+  }
+}
+
+/* ========== MOBILE + iPAD (≤1023px) — same look as your mobile ========== */
+@media (max-width: 1023px) {
+  .logoImage {
+    width: 90px;
+    margin-right: 8px;
+  }
+  .header {
+    padding: 0.5rem 1rem;
+    height: 80px;
+  }
+  .nav, .rightControls {
+    display: none;
+  }
+  .menuToggle {
+    display: block;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    z-index: 1001;
+  }
+  .navMobileOpen {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    gap: 16px;
+    z-index: 1000;
+    background-color: var(--background);
+    backdrop-filter: none !important;
+  }
+  .navMobileOpen a,
+  .navMobileOpen .activeLink {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    text-align: center;
+  }
+  .mobileRightGroup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mobileRightGroup .languageSelect {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border: 1px solid var(--text);
+    border-radius: 4px;
+  }
+  .mobileRightGroup .menuToggle {
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    padding: 0 6px;
+  }
+  .iconButton,
+  .themeToggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .iconButton svg,
+  .themeToggle svg {
+    width: 18px;
+    height: 18px;
+  }
+  .iconButton:hover,
+  .themeToggle:hover {
+    opacity: 0.7;
+  }
+  .searchInputMobile {
+    flex: 1;
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    border: 1px solid var(--text);
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--text);
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ✅ Light / Dark theme vars (unchanged) */
+:root {
+  --background: #ffffff;
+  --text: #1e1e1e;
+  --primary: #0077cc;
+  --card: #f5f5f5;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f1115;
+    --text: #ffffff;
+    --primary: #1e90ff;
+    --card: #1c1f26;
+  }
+}
+
+/* ---------- DONATE BANNER (Mobile + iPad) ---------- */
+@media (max-width: 1023px) {
+  .donateBanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #a50e0e; /* Strong red */
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000; /* above header */
+  }
+
+  /* Push the header down so banner doesn't overlap it */
+  .header {
+    top: 50px; /* adjust to banner height if changed */
+  }
+}
+
+/* ---------- Mobile/iPad Aside wrapper inside drawer ---------- */
+@media (max-width: 1023px) {
+  .mobileAsideWrapper {
+    margin-top: 1rem;
+    background-color: var(--background);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .mobileAsideWrapper .aside {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--background);
+    border-radius: 12px;
+  }
+
+  .mobileAsideWrapper .section {
+    flex: 1 1 45%;
+    background-color: var(--card);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mobileAsideWrapper .sectionToggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: var(--primary);
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease;
+  }
+
+  .mobileAsideWrapper .sectionToggle::after {
+    content: '▸';
+    margin-left: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .mobileAsideWrapper .section.open .sectionToggle::after {
+    transform: rotate(90deg);
+  }
+
+  .mobileAsideWrapper .section ul {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    transition: max-height 0.4s ease;
+  }
+
+  .mobileAsideWrapper .section.open ul {
+    display: block;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .mobileAsideWrapper .section.open ul::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .mobileAsideWrapper .section.open ul::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 6px;
+  }
+
+  .mobileAsideWrapper .section.open ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .mobileAsideWrapper .aside ul li a {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra scroll styling for the wrapper */
+@media (max-width: 1023px) {
+  .mobileAsideWrapper {
+    margin-top: 1.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    scrollbar-width: thin;
+  }
+
+  .mobileAsideWrapper::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .mobileAsideWrapper::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 6px;
+  }
+}
+/* ===== Tablet (iPad) view: keep same style as mobile but add padding/margin ===== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navMobileOpen {
+    padding: 1.5rem;         /* more inner space */
+    gap: 20px;
+  }
+
+  .mobileAsideWrapper {
+    margin-top: 1rem;
+    margin-left: 1rem;       /* ✅ add side margin */
+    margin-right: 1rem;      /* ✅ add side margin */
+    background-color: var(--background);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .mobileAsideWrapper .section {
+    margin-top: 10px;
+  }
+}
