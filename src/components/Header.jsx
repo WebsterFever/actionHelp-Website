@@ -1,101 +1,81 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
+import asideStyles from "../components/AsideMenu.module.css";
 import { Moon, Sun, Search } from "lucide-react";
 import SearchBar from "./SearchBar";
 import AsideMenu from "../components/AsideMenu";
 
-const MOBILE_QUERY = "(max-width: 1023px)"; // iPad behaves like mobile
-
-const Header = ({ theme, setTheme }) => {
+const Header = ({ theme = "light", setTheme }) => {
   const { t, changeLanguage } = useLanguage();
   const nav = t.nav;
   const home = t.home;
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const isContactPage = pathname === "/contact";
+  const isDonatePage  = pathname === "/donate";
 
-  // Keep JS in sync with CSS breakpoint (≤1023px)
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const handleLanguageChange = (e) => changeLanguage(e.target.value);
+  const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
+  const handleMenuItemClick = () => setIsMobileMenuOpen(false);
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia(MOBILE_QUERY);
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener ? mq.addEventListener("change", update) : mq.addListener(update);
-    return () => {
-      mq.removeEventListener ? mq.removeEventListener("change", update) : mq.removeListener(update);
-    };
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Close menu & search on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setShowSearch(false);
-  }, [pathname]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  const handleLanguageChange = (e) => {
-    changeLanguage(e.target.value);
-  };
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
-  };
 
   return (
     <>
-      {isMobile && (
-        <div
-          className={styles.donateBanner}
-          onClick={() => navigate("/donate")}
-        >
+      {window.innerWidth <= 767 && (
+        <div className={styles.donateBanner} onClick={() => navigate("/donate")}>
           {home.donateMessage}
         </div>
       )}
 
-      <header className={styles.header}>
-        {!showSearch && (
-          <Link to="/" className={styles.logo}>
-            <img
-              src="/images/logo.png"
-              alt="ActionHelp Logo"
-              className={styles.logoImage}
-            />
-          </Link>
-        )}
+      {/* Desktop-only top-centered logo */}
+      <div className={styles.topLogoBar}>
+        <Link to="/" onClick={handleMenuItemClick} className={styles.logoLink}>
+          <img src="/images/logo.png" alt="ActionHelp Logo" className={styles.topLogoImage} />
+        </Link>
+      </div>
 
-        {/* ✅ Mobile/iPad Controls */}
+      {/* Header */}
+      <header className={`${styles.header} ${scrolled ? styles.isScrolled : ""}`}>
+        {/* Mobile inline logo */}
+        <Link to="/" className={styles.mobileLogoWrap} onClick={handleMenuItemClick}>
+          <img src="/images/logo.png" alt="ActionHelp Logo" className={styles.mobileLogoImage} />
+        </Link>
+
+        {/* Mobile controls */}
         <div className={styles.mobileRightGroup}>
           {showSearch ? (
             <input
               type="text"
               className={styles.searchInputMobile}
-              placeholder="Search..."
+              placeholder={t.search?.placeholder || "Search..."}
               autoFocus
               onBlur={() => setShowSearch(false)}
             />
           ) : (
             <>
-              <button
-                className={styles.iconButton}
-                onClick={() => setShowSearch(true)}
-              >
+              <button className={styles.iconButton} onClick={() => setShowSearch(true)}>
                 <Search size={18} />
               </button>
 
-              <select
-                className={styles.languageSelect}
-                onChange={handleLanguageChange}
-                defaultValue="en"
-              >
+              <select className={styles.languageSelect} onChange={handleLanguageChange} defaultValue="en">
                 <option value="en">EN</option>
                 <option value="fr">FR</option>
                 <option value="es">ES</option>
@@ -109,6 +89,7 @@ const Header = ({ theme, setTheme }) => {
               <button
                 className={styles.menuToggle}
                 onClick={toggleMobileMenu}
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               >
                 {isMobileMenuOpen ? "✖" : "☰"}
               </button>
@@ -116,65 +97,50 @@ const Header = ({ theme, setTheme }) => {
           )}
         </div>
 
-        {/* ✅ Navigation */}
-        <nav
-          className={`${styles.nav} ${isMobileMenuOpen ? styles.navMobileOpen : ""}`}
-        >
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? styles.activeLink : undefined
-            }
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
+        {/* Nav */}
+        <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.navMobileOpen : ""}`}>
+          <NavLink to="/" className={({ isActive }) => (isActive ? styles.activeLink : undefined)} onClick={handleMenuItemClick}>
             {nav.home}
           </NavLink>
 
-          {!isContactPage && (
+          {!(isContactPage || isDonatePage) && (
             <>
-              <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>
-                {nav.about}
-              </a>
-              <a href="#mission" onClick={() => setIsMobileMenuOpen(false)}>
-                {nav.mission}
-              </a>
-              <a href="#services" onClick={() => setIsMobileMenuOpen(false)}>
-                {nav.services}
-              </a>
+              <a href="#about" onClick={handleMenuItemClick}>{nav.about}</a>
+              <a href="#mission" onClick={handleMenuItemClick}>{nav.mission}</a>
+              <a href="#services" onClick={handleMenuItemClick}>{nav.services}</a>
             </>
           )}
 
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive ? styles.activeLink : undefined
-            }
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
+          <NavLink to="/contact" className={({ isActive }) => (isActive ? styles.activeLink : undefined)} onClick={handleMenuItemClick}>
             {nav.contact}
           </NavLink>
 
-          {/* ✅ AsideMenu (inside drawer on mobile/iPad) */}
-          {isMobileMenuOpen && isMobile && (
+          {!isDonatePage && (
+            <NavLink to="/donate" onClick={handleMenuItemClick} className={`${asideStyles.flashDonate} ${styles.donateLinkReset}`}>
+              {(t.quickLinks && t.quickLinks.donate) || "Donate"} 💖
+            </NavLink>
+          )}
+
+          {isMobileMenuOpen && window.innerWidth <= 767 && !isDonatePage && (
             <div className={styles.mobileAsideWrapper}>
-              <AsideMenu />
+              <AsideMenu onItemClick={handleMenuItemClick} />
             </div>
           )}
         </nav>
 
-        {/* ✅ Desktop Controls */}
+        {/* Desktop controls (completely hidden on mobile) */}
         <div className={styles.rightControls}>
-          <SearchBar />
-          <select
-            className={styles.languageSelect}
-            onChange={handleLanguageChange}
-            defaultValue="en"
-          >
+          <div className={styles.searchDesktopOnly}>
+            <SearchBar />
+          </div>
+
+          <select className={styles.languageSelect} onChange={handleLanguageChange} defaultValue="en">
             <option value="en">English 🇺🇸</option>
             <option value="fr">Français 🇫🇷</option>
             <option value="es">Español 🇪🇸</option>
             <option value="ht">Kreyòl 🇭🇹</option>
           </select>
+
           <button onClick={toggleTheme} className={styles.themeToggle}>
             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>

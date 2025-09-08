@@ -302,22 +302,22 @@ export const languageData = {
         {
           title: "Programmes de langue & alphabétisation",
           image: "/images/lang.jpg",
-          description: "We help immigrants navigate legal, housing, and community resources."
+          description: "Nous aidons les immigrants à naviguer dans les ressources juridiques, de logement et communautaires."
         },
         {
           title: "Soutien scolaire pour enfants",
           image: "/images/education.jpg",
-          description: "We help immigrants navigate legal, housing, and community resources."
+          description: "Nous aidons les immigrants à naviguer dans les ressources juridiques, de logement et communautaires."
         },
         {
           title: "Ressources de logement et d’hébergement",
           image: "/images/housing.jpg",
-          description: "We help immigrants navigate legal, housing, and community resources."
+          description: "Nous aidons les immigrants à naviguer dans les ressources juridiques, de logement et communautaires."
         },
         {
           title: "Intégration & orientation culturelle",
           image: "/images/comu.jpeg",
-          description: "We help immigrants navigate legal, housing, and community resources."
+          description: "Nous aidons les immigrants à naviguer dans les ressources juridiques, de logement et communautaires."
         },
       ],
       testimonialTitle: "Témoignages",

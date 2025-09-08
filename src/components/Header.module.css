@@ -1,451 +1,250 @@
-/* ✅ Modern fonts */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
 
-/* ✅ Default font family */
-body {
-  font-family: 'Manrope', sans-serif;
+/* —— Tokens —— */
+:root{
+  --header-max: 1280px;
+  --top-logo-h: 110px;
+  --header-h: 90px;
+  --radius: 14px;
+
+  /* Light (tinted, higher contrast than pure white) */
+  --hdr-grad: linear-gradient(180deg, rgba(234,241,251,.94), rgba(222,233,249,.94));
+  --hdr-solid: rgba(226,236,251,.98);         /* used when scrolled */
+  --hdr-border: rgba(17, 52, 126, .14);
+  --hdr-shadow: 0 18px 42px rgba(32,57,92,.18);
+
+  --nav-color: #0e1a2b;                        /* darker text for contrast */
+  --nav-hover-pill: rgba(26,86,219,.08);
 }
 
-/* ✅ Headings with Jakarta Sans */
-h1, h2, h3, h4 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+/* Dark theme only when explicitly toggled */
+[data-theme="dark"]{
+  --hdr-grad: linear-gradient(180deg, rgba(36,39,46,.88), rgba(24,27,33,.88));
+  --hdr-solid: rgba(28,31,38,.95);
+  --hdr-border: rgba(255,255,255,.12);
+  --hdr-shadow: 0 18px 42px rgba(0,0,0,.35);
+  --nav-color: #eef2ff;
+  --nav-hover-pill: rgba(255,255,255,.08);
 }
 
-/* ========== HEADER STYLES ========== */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 30px;
-  height: 90px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  color: var(--text);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-
-  /* ★ Animated gradient background */
-  background: linear-gradient(-45deg, #4f4644, #47363c, #093849, #08362b);
-  background-size: 400% 400%;
-  animation:
-    slideDown 0.6s ease-in-out,
-    glowBorder 5s ease-in-out infinite,
-    gradientBG 15s ease infinite;
-}
-
-/* Slide-down animation */
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+/* Fallback to OS dark only if no explicit theme */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]) {
+    --hdr-grad: linear-gradient(180deg, rgba(36,39,46,.88), rgba(24,27,33,.88));
+    --hdr-solid: rgba(28,31,38,.95);
+    --hdr-border: rgba(255,255,255,.12);
+    --hdr-shadow: 0 18px 42px rgba(0,0,0,.35);
+    --nav-color: #eef2ff;
+    --nav-hover-pill: rgba(255,255,255,.08);
   }
 }
 
-/* Glowing border effect */
-@keyframes glowBorder {
-  0%, 100% {
-    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+/* — Donate banner (mobile) — */
+.donateBanner{
+  position:fixed; top:0; left:0; right:0; z-index:2000;
+  background:#c5162f; color:#fff; text-align:center;
+  padding:12px; font-weight:700; cursor:pointer;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+}
+
+/* — Desktop top-logo bar — */
+.topLogoBar{ display:none; }
+@media (min-width:1024px){
+  .topLogoBar{
+    position:fixed; top:0; left:0; right:0; height:var(--top-logo-h);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1100; background:transparent; pointer-events:none;
   }
-  50% {
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  .logoLink{ pointer-events:auto; }
+  .topLogoImage{ max-height: calc(var(--top-logo-h) - 12px); width:auto; object-fit:contain; display:block; }
+}
+
+/* — Header — */
+.header{
+  position:fixed;
+  top: var(--top-logo-h);
+  left:50%;
+  transform: translateX(-50%);
+  width: min(90%, var(--header-max));
+  height: var(--header-h);
+  padding-inline: 28px;
+  display:flex; align-items:center; justify-content:space-between;
+  z-index:1000;
+
+  background: var(--hdr-grad);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border:1px solid var(--hdr-border);
+  border-radius: var(--radius);
+  box-shadow: var(--hdr-shadow);
+  transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+/* More opaque + slightly stronger shadow after scroll */
+.isScrolled{
+  background: var(--hdr-solid);
+  box-shadow: 0 22px 48px rgba(32,57,92,.22);
+}
+
+/* Mobile position (under donate banner) */
+@media (max-width:1023px){
+  .header{
+    top: 50px; left:0; right:0; transform:none; width:100%;
+    height:80px; border-radius:0; padding-inline:16px;
   }
 }
 
-/* Gradient animation */
-@keyframes gradientBG {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+/* — Mobile logo — */
+.mobileLogoWrap{ display:flex; align-items:center; gap:8px; }
+.mobileLogoImage{ height:40px; width:auto; object-fit:contain; display:block; }
+@media (min-width:1024px){ .mobileLogoWrap{ display:none } }
 
-/* Logo styles */
-.logo {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 2rem;
+/* — Nav — */
+.nav{
+  display:flex; align-items:center; gap:36px; font-weight:700; font-size:16px;
+}
+.nav a, .activeLink{
+  position:relative; text-decoration:none; color:var(--nav-color);
+  padding:8px 10px; border-radius:10px; transition: background .2s ease, color .2s ease;
+}
+.nav a:hover{ background: var(--nav-hover-pill); }
+.activeLink{
   color: var(--primary);
-}
-.logoImage {
-  width: 150px;
-  object-fit: contain;
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
-}
-.logo:hover, .logo:focus, 
-.logoImage:hover, .logoImage:focus {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: var(--nav-hover-pill);
 }
 
-/* Navigation styles */
-.nav {
-  display: flex;
-  gap: 25px;
-  font-weight: bold;
-  font-size: 16px;
+/* donate pill keeps its own styles; just reset spacing */
+.donateLinkReset{ padding:0 !important; }
+
+/* — Right controls (desktop) — */
+.rightControls{ display:flex; align-items:center; gap:12px; }
+.languageSelect{
+  background: #f2f6ff; color: #0e1a2b;
+  border:1px solid var(--primary); padding:8px 12px; font-weight:600;
+  border-radius:8px; cursor:pointer;
 }
-.nav a,
-.nav .activeLink {
-  position: relative;
-  text-decoration: none;
-  color: var(--text);
-  transition: color 0.3s ease;
+.languageSelect:focus{ outline:none; box-shadow:0 0 0 2px rgba(0,119,204,.2); }
+.themeToggle{
+  background:none; border:none; color:var(--nav-color); cursor:pointer;
+  display:grid; place-items:center; padding:6px; border-radius:8px;
+  transition: background .2s ease, transform .2s ease;
 }
-.nav a::after,
-.nav .activeLink::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background-color: var(--primary);
-  transition: width 0.3s ease;
+.themeToggle:hover{ background: var(--nav-hover-pill); transform: translateY(-1px); }
+
+/* — Mobile controls & drawer — */
+.mobileRightGroup{ display:none; }
+.iconButton{
+  background:none; border:none; color:var(--nav-color); cursor:pointer;
+  padding:6px; border-radius:8px; transition: background .2s ease;
 }
-.nav a:hover::after {
-  width: 100%;
-}
-.nav .activeLink::after {
-  width: 100%;
-}
-.nav .activeLink {
-  color: var(--primary);
+.iconButton:hover{ background: var(--nav-hover-pill); }
+.searchInputMobile{
+  width: min(70vw, 420px); padding:8px 12px; border-radius:8px;
+  border:1px solid var(--hdr-border); background: #fff; color: #111;
 }
 
-/* Right side controls */
-.rightControls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.themeToggle {
-  font-size: 1.4rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text);
-  transition: transform 0.3s ease;
-}
-.themeToggle:hover {
-  transform: scale(1.2);
-}
-.languageSelect {
-  background-color: var(--card);
-  color: var(--text);
-  border: 1px solid var(--primary);
-  padding: 8px 14px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-.languageSelect:hover, .languageSelect:focus {
-  border-color: var(--primary);
-  background-color: var(--primary);
-  color: white;
-  outline: none;
-}
-.languageSelect option {
-  background-color: var(--background);
-  color: var(--text);
+.menuToggle{
+  background:none; border:none; color:var(--nav-color);
+  font-size:1.75rem; line-height:1; cursor:pointer; padding:2px 6px;
 }
 
-/* ========== DESKTOP ========== */
-@media (min-width: 1024px) {
-  .nav {
-    display: flex;
+@media (max-width:1023px){
+  .mobileRightGroup{ display:flex; align-items:center; gap:10px; margin-left:auto; }
+  .nav{ display:none; }
+  .navMobileOpen{
+    display:flex !important; flex-direction:column; gap:14px;
+    position:absolute; top: 80px; left:0; right:0;
+    background: var(--hdr-solid);
+    backdrop-filter: blur(10px);
+    border-top:1px solid var(--hdr-border);
+    padding:16px; z-index:1001;
   }
-  .rightControls {
-    display: flex;
-  }
-  .menuToggle,
-  .mobileRightGroup {
-    display: none;
-  }
-  .logoImage {
-    width: 150px;
-  }
+  .navMobileOpen a, .navMobileOpen .activeLink{ text-align:center; font-size:1.05rem; }
+  .mobileAsideWrapper{ margin-top:8px; }
 }
 
-/* ========== MOBILE + iPAD (≤1023px) — same look as your mobile ========== */
+/* Desktop tweaks */
+@media (min-width:1024px){
+  .nav{ gap:32px; }
+  .rightControls{ gap:14px; }
+}
+
+/* Give anchors room below the fixed bars */
+@media (min-width:1024px){
+  html{ scroll-padding-top: calc(var(--top-logo-h) + var(--header-h) + 12px); }
+}
+/* Hide the whole desktop control bar on tablet/phone */
 @media (max-width: 1023px) {
-  .logoImage {
-    width: 90px;
-    margin-right: 8px;
-  }
+  .rightControls { display: none !important; }
+}
+
+/* Extra guard so the big SearchBar never shows on small screens */
+.searchDesktopOnly { display: block; }
+@media (max-width: 1023px) {
+  .searchDesktopOnly { display: none !important; }
+}
+/* --- Give the mobile header extra room on the right (safe-area aware) --- */
+@media (max-width: 1023px) {
   .header {
-    padding: 0.5rem 1rem;
-    height: 80px;
+    /* left / right padding accounts for iOS safe areas too */
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
-  .nav, .rightControls {
-    display: none;
-  }
+
+  /* Slightly increase spacing between icons and add right margin to the burger */
+  .mobileRightGroup { gap: 14px; }
+
   .menuToggle {
-    display: block;
-    font-size: 2rem;
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-    z-index: 1001;
-  }
-  .navMobileOpen {
-    display: flex !important;
-    flex-direction: column;
-    position: absolute;
-    top: 90px;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    gap: 16px;
-    z-index: 1000;
-    background-color: var(--background);
-    backdrop-filter: none !important;
-  }
-  .navMobileOpen a,
-  .navMobileOpen .activeLink {
-    font-size: 1.1rem;
-    padding: 0.5rem 0;
-    text-align: center;
-  }
-  .mobileRightGroup {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .mobileRightGroup .languageSelect {
-    font-size: 0.85rem;
-    padding: 4px 8px;
-    border: 1px solid var(--text);
-    border-radius: 4px;
-  }
-  .mobileRightGroup .menuToggle {
-    font-size: 1.8rem;
-    background: none;
-    border: none;
-    color: var(--text);
-    padding: 0 6px;
-  }
-  .iconButton,
-  .themeToggle {
-    background: none;
-    border: none;
-    color: var(--text);
-    padding: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .iconButton svg,
-  .themeToggle svg {
-    width: 18px;
-    height: 18px;
-  }
-  .iconButton:hover,
-  .themeToggle:hover {
-    opacity: 0.7;
-  }
-  .searchInputMobile {
-    flex: 1;
-    width: 100%;
-    padding: 6px 10px;
-    font-size: 0.9rem;
-    border: 1px solid var(--text);
-    border-radius: 6px;
-    background-color: transparent;
-    color: var(--text);
-    animation: fadeIn 0.2s ease-in-out;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+    margin-right: max(6px, env(safe-area-inset-right));
+    padding: 8px;               /* bigger tap target */
+    min-width: 44px;            /* a11y */
+    min-height: 44px;
   }
 }
-
-/* ✅ Light / Dark theme vars (unchanged) */
-:root {
-  --background: #ffffff;
-  --text: #1e1e1e;
-  --primary: #0077cc;
-  --card: #f5f5f5;
-}
-@media (prefers-color-scheme: dark) {
+/* === Mobile: bigger side gutters for the header & drawer === */
+@media (max-width: 1023px) {
   :root {
-    --background: #0f1115;
-    --text: #ffffff;
-    --primary: #1e90ff;
-    --card: #1c1f26;
-  }
-}
-
-/* ---------- DONATE BANNER (Mobile + iPad) ---------- */
-@media (max-width: 1023px) {
-  .donateBanner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #a50e0e; /* Strong red */
-    color: white;
-    padding: 12px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2000; /* above header */
+    /* ← bump these up if you want even more space */
+    --m-pad-x: clamp(24px, 7vw, 36px);  /* left/right padding inside header */
+    --m-burger-mr: clamp(14px, 3vw, 22px); /* extra space to the RIGHT of burger */
+    --m-icon-gap: 16px;                  /* spacing between icons */
   }
 
-  /* Push the header down so banner doesn't overlap it */
   .header {
-    top: 50px; /* adjust to banner height if changed */
-  }
-}
-
-/* ---------- Mobile/iPad Aside wrapper inside drawer ---------- */
-@media (max-width: 1023px) {
-  .mobileAsideWrapper {
-    margin-top: 1rem;
-    background-color: var(--background);
-    padding: 1rem;
-    border-radius: 12px;
+    /* generous side padding + iOS safe-area support */
+    padding-left:  calc(var(--m-pad-x) + env(safe-area-inset-left));
+    padding-right: calc(var(--m-pad-x) + env(safe-area-inset-right));
   }
 
-  .mobileAsideWrapper .aside {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: space-between;
-    width: 100%;
-    padding: 1rem;
-    background-color: var(--background);
-    border-radius: 12px;
+  .mobileRightGroup { gap: var(--m-icon-gap); }
+
+  .menuToggle {
+    /* push the burger further from the edge */
+    margin-right:40px;
+    padding: 10px;           /* keep touch target comfy */
+    min-width: 44px;
+    min-height: 44px;
   }
 
-  .mobileAsideWrapper .section {
-    flex: 1 1 45%;
-    background-color: var(--card);
-    padding: 1rem;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .mobileAsideWrapper .sectionToggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--card);
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    color: var(--primary);
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    width: 100%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s ease;
-  }
-
-  .mobileAsideWrapper .sectionToggle::after {
-    content: '▸';
-    margin-left: auto;
-    transition: transform 0.3s ease;
-  }
-
-  .mobileAsideWrapper .section.open .sectionToggle::after {
-    transform: rotate(90deg);
-  }
-
-  .mobileAsideWrapper .section ul {
-    display: none;
-    max-height: 0;
-    overflow: hidden;
-    padding-left: 1rem;
-    margin-top: 0.5rem;
-    transition: max-height 0.4s ease;
-  }
-
-  .mobileAsideWrapper .section.open ul {
-    display: block;
-    max-height: 200px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-
-  .mobileAsideWrapper .section.open ul::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .mobileAsideWrapper .section.open ul::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 6px;
-  }
-
-  .mobileAsideWrapper .section.open ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  .mobileAsideWrapper .aside ul li a {
-    font-size: 0.85rem;
-  }
-}
-
-/* Extra scroll styling for the wrapper */
-@media (max-width: 1023px) {
-  .mobileAsideWrapper {
-    margin-top: 1.5rem;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 0.5rem;
-    scrollbar-width: thin;
-  }
-
-  .mobileAsideWrapper::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .mobileAsideWrapper::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 6px;
-  }
-}
-/* ===== Tablet (iPad) view: keep same style as mobile but add padding/margin ===== */
-@media (min-width: 768px) and (max-width: 1023px) {
+  /* If you open the mobile drawer, keep the same side gutters there too */
   .navMobileOpen {
-    padding: 1.5rem;         /* more inner space */
-    gap: 20px;
+    padding-left:  calc(var(--m-pad-x) + env(safe-area-inset-left));
+    padding-right: calc(var(--m-pad-x) + env(safe-area-inset-right));
+  }
+}
+/* Bigger logo on mobile */
+@media (max-width: 1023px) {
+  .mobileLogoImage {
+    height: clamp(56px, 7vh, 64px); /* was ~40px */
+    width: auto;
+    object-fit: contain;
   }
 
-  .mobileAsideWrapper {
-    margin-top: 1rem;
-    margin-left: 1rem;       /* ✅ add side margin */
-    margin-right: 1rem;      /* ✅ add side margin */
-    background-color: var(--background);
-    padding: 1rem;
-    border-radius: 12px;
+  /* give the header more vertical room so the larger logo fits nicely */
+  .header {
+    height: 92px; /* was 80px */
   }
-
-  .mobileAsideWrapper .section {
-    margin-top: 10px;
-  }
+}
+@media (max-width: 767px) {
+  .wel { margin-top: 20px; }
 }

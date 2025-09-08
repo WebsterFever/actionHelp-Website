@@ -290,3 +290,45 @@
     opacity: 1;
   }
 }
+/* --- Keep the donate card below the fixed header/logo --- */
+:root {
+  /* desktop */
+  --donate-header-h: 90px;     /* your header height on desktop */
+  --donate-top-logo-h: 120px;  /* your big logo bar height on desktop */
+  --donate-gap: 18px;          /* breathing room under the header */
+
+  /* mobile/tablet */
+  --donate-header-h-mobile: 80px;
+  --donate-banner-h-mobile: 50px; /* the red “Make your donation” bar */
+}
+
+/* your container */
+.container {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 👇 dynamic margin-top so it never hides under the header */
+  margin-top: calc(var(--donate-top-logo-h) + var(--donate-header-h) + var(--donate-gap));
+
+  padding: 2rem;
+  color: var(--text);
+  border-radius: 12px;
+  box-sizing: border-box;
+
+  /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  opacity: 0;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease forwards, float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
+}
+
+/* phones & iPad: header is shorter but you also have the red donate bar */
+@media (max-width: 1023px) {
+  .container {
+    margin-top: calc(var(--donate-header-h-mobile) + var(--donate-banner-h-mobile) + var(--donate-gap));
+  }
+}
