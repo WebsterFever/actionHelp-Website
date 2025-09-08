@@ -5,7 +5,7 @@ import styles from "./Header.module.css";
 import asideStyles from "../components/AsideMenu.module.css";
 import { Moon, Sun, Search } from "lucide-react";
 import SearchBar from "./SearchBar";
-import AsideMenu from "../components/AsideMenu";
+// ❌ Removed: import AsideMenu from "../components/AsideMenu";
 
 const Header = ({ theme = "light", setTheme }) => {
   const { t, changeLanguage } = useLanguage();
@@ -99,7 +99,11 @@ const Header = ({ theme = "light", setTheme }) => {
 
         {/* Nav */}
         <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.navMobileOpen : ""}`}>
-          <NavLink to="/" className={({ isActive }) => (isActive ? styles.activeLink : undefined)} onClick={handleMenuItemClick}>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
+            onClick={handleMenuItemClick}
+          >
             {nav.home}
           </NavLink>
 
@@ -111,24 +115,33 @@ const Header = ({ theme = "light", setTheme }) => {
             </>
           )}
 
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? styles.activeLink : undefined)} onClick={handleMenuItemClick}>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) => (isActive ? styles.activeLink : undefined)}
+            onClick={handleMenuItemClick}
+          >
             {nav.contact}
           </NavLink>
 
           {!isDonatePage && (
-            <NavLink to="/donate" onClick={handleMenuItemClick} className={`${asideStyles.flashDonate} ${styles.donateLinkReset}`}>
+            <NavLink
+              to="/donate"
+              onClick={handleMenuItemClick}
+              className={`${asideStyles.flashDonate} ${styles.donateLinkReset}`}
+            >
               {(t.quickLinks && t.quickLinks.donate) || "Donate"} 💖
             </NavLink>
           )}
 
-          {isMobileMenuOpen && window.innerWidth <= 767 && !isDonatePage && (
+          {/* ❌ Removed the AsideMenu on mobile to hide Blog/Services cards */}
+          {/* {isMobileMenuOpen && window.innerWidth <= 767 && !isDonatePage && (
             <div className={styles.mobileAsideWrapper}>
               <AsideMenu onItemClick={handleMenuItemClick} />
             </div>
-          )}
+          )} */}
         </nav>
 
-        {/* Desktop controls (completely hidden on mobile) */}
+        {/* Desktop controls (hidden on mobile) */}
         <div className={styles.rightControls}>
           <div className={styles.searchDesktopOnly}>
             <SearchBar />
