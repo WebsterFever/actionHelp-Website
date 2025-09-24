@@ -3,7 +3,7 @@
 /* —— Tokens —— */
 :root{
   --header-max: 1280px;
-  --top-logo-h: 110px;
+  --top-logo-h: 170px;
   --header-h: 90px;
   --radius: 14px;
 
@@ -166,7 +166,7 @@
 /* Desktop tweaks */
 @media (min-width:1024px){
   .nav{ gap:32px; }
-  .rightControls{ gap:14px; }
+  
 }
 
 /* Give anchors room below the fixed bars */
@@ -279,4 +279,182 @@
   .mobileAsideWrapper{ margin-top:8px; }
 }
 
+
+
 /* …keep the rest of your CSS exactly as-is… */
+
+/* Unfix logo bar + header everywhere */
+.topLogoBar{
+  position: static !important;
+  top:auto !important; left:auto !important; right:auto !important;
+  height:auto;
+  pointer-events:auto;
+}
+
+.header{
+  position: static !important;
+  top:auto !important; left:auto !important; right:auto !important;
+  transform:none !important;
+  width:100% !important;
+  border-radius:0 !important;
+}
+
+/* No extra anchor offset needed once header isn’t fixed */
+@media (min-width:1024px){
+  html{ scroll-padding-top: 0 !important; }
+}
+/* === Desktop (≥1024px): unfix logo bar + header === */
+@media (min-width:1024px){
+  .topLogoBar{
+    position: static !important;
+    top:auto !important; left:auto !important; right:auto !important;
+    height:auto !important;
+    pointer-events:auto !important;
+  }
+
+  .header{
+    position: static !important;
+    top:auto !important; left:auto !important; right:auto !important;
+    transform:none !important;
+    width:100% !important;
+    border-radius:0 !important;
+    box-shadow: none; /* optional */
+  }
+
+  /* no extra offset needed once header isn't fixed on desktop */
+  html{ scroll-padding-top: 0 !important; }
+}
+
+/* === Mobile (<1024px): KEEP header fixed === */
+@media (max-width:1023px){
+  .header{
+    position: fixed !important;
+    top:50px !important;            /* under your donate banner */
+    left:0 !important; right:0 !important;
+    transform:none !important;
+    width:100% !important;
+    height:92px;                    /* your current mobile height */
+    border-radius:0 !important;
+    z-index:1000 !important;
+  }
+}
+/* === Fixed Donate banner everywhere === */
+:root { --donate-h: 48px; } /* tweak to match your banner’s height */
+
+.donateBanner{
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 2000 !important;           /* above header */
+  height: var(--donate-h);
+  padding: 0 1rem;                     /* keep text centered vertically */
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Mobile: header stays fixed under the banner */
+@media (max-width:1023px){
+  .header{
+    position: fixed !important;
+    top: var(--donate-h) !important;   /* sits right below the banner */
+    left:0; right:0; transform:none;
+  }
+  /* page needs room for banner + fixed header */
+  .home{
+    padding-top: calc(var(--donate-h) + var(--header-h) + 8px) !important;
+  }
+}
+
+/* Desktop: header is NOT fixed, only the banner is */
+@media (min-width:1024px){
+  .header{ position: static !important; top:auto !important; }
+  /* page only needs room for the fixed banner */
+  .home{ padding-top: calc(var(--donate-h) + 8px) !important; }
+}
+/* 1) Make the theme toggle visible on DESKTOP */
+@media (min-width:1024px){
+  
+  /* show the correct icon per theme */
+  html[data-theme="dark"]  .rightControls .sun{ display:none !important; }
+  html[data-theme="dark"]  .rightControls .moon{ display:block !important; }
+  html:not([data-theme="dark"]) .rightControls .sun{ display:block !important; }
+  html:not([data-theme="dark"]) .rightControls .moon{ display:none !important; }
+}
+
+/* 2) Fallback: if your toggle only exists inside .mobileRightGroup,
+      show JUST that button on desktop too (hide the other mobile icons). */
+@media (min-width:1024px){
+  .mobileRightGroup{
+    display:flex !important;
+    margin-left:auto;            /* push to the far right */
+    gap:12px;
+  }
+  .mobileRightGroup > *{ display:none !important; }        /* hide others */
+  .mobileRightGroup .themeToggle{ display:inline-grid !important; }
+}
+
+
+/* Desktop: evenly space the nav with space-around */
+@media (min-width:1024px){
+  /* kill anything that was shifting the header */
+.header {
+  height: 120px; /* or auto if you want it to fit the logo */
+  padding: 0 32px;   /* equal left/right padding */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+
+
+  /* make the nav a flex row that fills the middle and uses space-around */
+  .nav{
+    position: static !important;           /* undo any absolute centering */
+    left: auto !important;
+    transform: none !important;
+
+    display: flex !important;
+    flex: 1 1 auto !important;             /* take the available middle space */
+    justify-content: space-around !important;
+    align-items: center !important;
+
+    width: auto !important;
+    margin: 0 16px !important;
+    gap: 0 !important;                      /* rely on space-around, not gap */
+  }
+
+  /* controls stay on the right; no extra push needed */
+  .rightControls{
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+  }
+}
+/* ===== Desktop: perfectly even spacing ===== */
+@media (min-width: 1024px) {
+  .header {
+    height: 120px;
+    padding: 0 72px 0 38px;                 /* equal left/right padding */
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;              /* for centering the nav */
+  }
+
+  /* Absolutely center the nav regardless of right side width */
+  .nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex !important;
+    align-items: center;
+    gap: 48px;                       /* menu spacing */
+    white-space: nowrap;
+  }
+
+  /* Keep right controls pinned to the right edge */
+  .rightControls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
