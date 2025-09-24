@@ -2882,6 +2882,7 @@
   margin-left: calc(50% - 50vw) !important;
   margin-right: calc(50% - 50vw) !important;
   border-radius: 0 !important;
+  
 }
 .heroMainContent .heroTextBlock,
 .heroMainContent .heroImage{ margin-top: 0 !important; }
@@ -2902,6 +2903,7 @@
   margin-right: calc(50% - 50dvw) !important;
   border-radius: 0 !important;
   box-sizing: border-box;
+
 }
 @supports not (width: 100dvw){
   .heroMainContent{
@@ -2927,6 +2929,7 @@
     left: 50%;
     transform: translateX(-50%);
     border-radius: 0 !important;
+  
   }
 }
 @supports not (overflow: clip) {
@@ -3293,4 +3296,62 @@
   --accent: #7c3aed;
   --titleColorLight: #0b1220;
   --cardBgLight: linear-gradient(180deg,#f5f3ff 0%, #ffffff 100%);
+}
+/* === Dark-mode visibility hotfix for leadership cards === */
+:root[data-theme="dark"] .leadershipItem .leaderName {
+  color: #f9fafb !important;   /* bright white */
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .leadershipItem .leaderName {
+    color: #f9fafb !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Optional: brighten paragraph text in dark mode */
+:root[data-theme="dark"] .leadershipItem .leaderText {
+  color: #e5e7eb !important;
+}
+@media (prefers-color-scheme: dark) {
+  .leadershipItem .leaderText {
+    color: #e5e7eb !important;
+  }
+}
+
+/* Neutralize any light-only per-card title overrides in dark mode */
+:root[data-theme="dark"] .leadershipList > li {
+  --titleColor: unset;
+}
+/* --- LIGHT MODE: make leadership text readable --- */
+:root:not([data-theme="dark"]) .leadershipItem .leaderName {
+  color: #0b1220 !important;   /* strong title */
+}
+:root:not([data-theme="dark"]) .leadershipItem .leaderRole {
+  color: var(--accent, var(--primary)) !important;
+}
+:root:not([data-theme="dark"]) .leadershipItem .leaderText {
+  color: #0f172a !important;   /* body text */
+  opacity: 1 !important;       /* remove any faint look */
+}
+
+/* Keep dark-mode colors scoped to dark only */
+:root[data-theme="dark"] .leadershipItem .leaderName { color: #f9fafb !important; }
+:root[data-theme="dark"] .leadershipItem .leaderRole { color: #60a5fa !important; }
+:root[data-theme="dark"] .leadershipItem .leaderText { color: #e5e7eb !important; }
+
+
+/* === Mobile: glue the hero to the header (no extra gap) === */
+@media (max-width:1023px){
+  /* remove the extra +8px you currently add for spacing */
+  .home{
+    padding-top: calc(var(--donate-h) + var(--header-h)) !important;
+  }
+
+  /* kill any internal offsets on the hero block */
+  .hero{ padding-top: 0 !important; margin-top: 0 !important; }
+  .heroMainContent{ margin-top: 0 !important; }
 }

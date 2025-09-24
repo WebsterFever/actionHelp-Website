@@ -1,5 +1,5 @@
 
-// import React, { useEffect, useRef, useState } from "react";
+// import React, { useEffect, useRef, useState, useMemo } from "react";
 // import { useLanguage } from "../context/LanguageContext";
 // import { useSearch } from "../context/SearchContext";
 // import styles from "./Home.module.css";
@@ -168,6 +168,30 @@
 //   const leadershipTitle = home?.leadership?.title || "Our Leadership";
 //   const leadershipMembers = home?.leadership?.members || [];
 
+//   /** ─── Testimony-style statements (About / Mission / Values / Purpose / Vision) ─── */
+//   const statements = useMemo(
+//     () =>
+//       [
+//         { key: "about", title: home.aboutTitle, text: home.aboutDescription },
+//         { key: "mission", title: home.missionTitle, text: home.missionDescription },
+//         { key: "values", title: home.valuesTitle, text: home.valuesDescription },
+//         { key: "purpose", title: home.purposeTitle, text: home.purposeDescription },
+//         { key: "vision", title: home.visionTitle, text: home.visionDescription },
+//       ].filter(Boolean),
+//     [home]
+//   );
+
+//   const [statementIdx, setStatementIdx] = useState(0);
+//   const [pauseStatements, setPauseStatements] = useState(false);
+
+//   useEffect(() => {
+//     if (pauseStatements || statements.length <= 1) return;
+//     const id = setInterval(() => {
+//       setStatementIdx((i) => (i + 1) % statements.length);
+//     }, 5000);
+//     return () => clearInterval(id);
+//   }, [pauseStatements, statements.length]);
+
 //   return (
 //     <main id="top" className={styles.home}>
 //       {isMobile && (
@@ -182,49 +206,108 @@
 //       <div className={styles.homeContainer}>
 //         {/* Hero */}
 //         <section className={styles.hero}>
-//           <div className={styles.heroMainContent}>
-//             <div className={styles.heroTextBlock}>
-//               <h1 className={styles.wel}>{home.welcomeText}</h1>
-//               <p>{home.description}</p>
-//             </div>
-//             <img
-//               src={heroImages[currentImageIndex]}
-//               alt="Supportive"
-//               className={styles.heroImage}
-//             />
-//           </div>
+//          <div className={styles.heroMainContent}>
+//   <img
+//     src={heroImages[currentImageIndex]}
+//     alt="Supportive"
+//     className={styles.heroImage}
+//   />
+
+//   {/* centered overlay */}
+//   <div
+//     className={styles.heroTextBlock}
+//     style={{
+//       position: "absolute",
+//       inset: 0,
+//       display: "grid",
+//       placeItems: "center",
+//       zIndex: 1,
+//       pointerEvents: "none", // keep image/links clickable beneath
+//       padding: "clamp(12px, 2vw, 24px)",
+//       textAlign: "center",
+//     }}
+//   >
+//     <div style={{ maxWidth: "min(92vw, 1100px)" }}>
+//       <h1
+//         className={styles.wel}
+//         style={{
+//           margin: 0,
+//           lineHeight: 1.05,
+//           letterSpacing: ".02em",
+//           textTransform: "uppercase",
+//           filter: "drop-shadow(0 2px 10px rgba(0,0,0,.45))",
+//         }}
+//       >
+//         {home.welcomeText}
+//       </h1>
+
+//       <p
+//         style={{
+//           margin: "10px auto 0",
+//           fontWeight: 700,
+//           fontSize: "clamp(1rem, 2.6vw, 1.55rem)",
+//           lineHeight: 1.35,
+//           textWrap: "balance",
+//           color: "#f3f4f6",
+//           textShadow: "0 2px 10px rgba(0,0,0,.45)",
+//         }}
+//       >
+//         {home.description}
+//       </p>
+//     </div>
+//   </div>
+// </div>
+
 //           <div className={styles.testimonials}>
 //             <TestimonialSection />
 //           </div>
 //         </section>
 
-//         {/* About & Mission */}
-//         <section id="about" className={`${styles.aboutMission} ${styles.anchorFix}`}>
-//           <div className={styles.about}>
-//             <h2>{home.aboutTitle}</h2>
-//             <p>{home.aboutDescription}</p>
+//         {/* Statements (testimony style) */}
+//         <section
+//           id="statements"
+//           className={`${styles.statementsCarousel} ${styles.anchorFix}`}
+//           onMouseEnter={() => setPauseStatements(true)}
+//           onMouseLeave={() => setPauseStatements(false)}
+//         >
+//           <div className={styles.statementsHeader}>
+//             <h2>{home?.statementsTitle || "Who We Are"}</h2>
+//             <p className={styles.statementsSub}>
+//               {home?.statementsSubtitle ||
+//                 ""}
+//             </p>
 //           </div>
 
-//           <div id="mission" className={`${styles.mission} ${styles.anchorFix}`}>
-//             <h2>{home.missionTitle}</h2>
-//             <p>{home.missionDescription}</p>
+//           <div className={styles.statementViewport}>
+//             <div
+//               className={styles.statementTrack}
+//               style={{ transform: `translateX(-${statementIdx * 100}%)` }}
+//             >
+//               {statements.map((s, i) => (
+//                 <article key={s.key ?? i} className={styles.statementSlide}>
+//                   <div className={styles.statementCard}>
+//                     <div className={styles.statementBadge}>
+//                       {/* small colored dot like a testimonial avatar */}
+//                     </div>
+//                     <h3 className={styles.statementTitle}>{s.title}</h3>
+//                     <p className={styles.statementText}>{s.text}</p>
+//                   </div>
+//                 </article>
+//               ))}
+//             </div>
 //           </div>
-//         </section>
 
-//         {/* Vision • Purpose • Values */}
-//         <section id="statements" className={`${styles.statements} ${styles.anchorFix}`}>
-//           <div className={styles.orbitWrap}>
-//             {[
-//               { key: "vision", title: home.visionTitle, text: home.visionDescription },
-//               { key: "purpose", title: home.purposeTitle, text: home.purposeDescription },
-//               { key: "values", title: home.valuesTitle, text: home.valuesDescription },
-//             ].map((item, idx) => (
-//               <article key={item.key} className={styles.orbitItem}>
-//                 <div className={styles.orbitCard} style={{ ["--i"]: String(idx) }}>
-//                   <h3>{item.title}</h3>
-//                   <p>{item.text}</p>
-//                 </div>
-//               </article>
+//           <div className={styles.statementDots} role="tablist" aria-label="Statements">
+//             {statements.map((_, i) => (
+//               <button
+//                 key={i}
+//                 role="tab"
+//                 aria-selected={statementIdx === i}
+//                 className={`${styles.statementDot} ${
+//                   statementIdx === i ? styles.activeDot : ""
+//                 }`}
+//                 onClick={() => setStatementIdx(i)}
+//               />
 //             ))}
 //           </div>
 //         </section>
@@ -235,12 +318,29 @@
 
 //           {leadershipMembers.length > 0 ? (
 //             <ul className={styles.leadershipList}>
-//               {leadershipMembers.map((m) => (
-//                 <li key={m.name} className={styles.leadershipItem}>
+//               {leadershipMembers.map((m, idx) => (
+//                 <li
+//                   key={m.name}
+//                   className={styles.leadershipItem}
+//                   style={{
+//                     // You can pass these in home.leadership.members:
+//                     // { cardColor, titleColor, roleColor, accentColor, textColor }
+//                     background: m.cardColor || undefined,
+//                     borderColor: m.cardColor ? `${m.cardColor}` : undefined,
+//                     "--accent": m.accentColor || undefined,
+//                     "--delay": `${idx * 120}ms`,
+//                   }}
+//                 >
 //                   <img src={m.image} alt={m.name} className={styles.leaderImg} />
-//                   <p className={styles.leaderName}>{m.name}</p>
-//                   <p className={styles.leaderRole}>{m.role}</p>
-//                   <p className={styles.leaderText}>{m.bio}</p>
+//                   <p className={styles.leaderName} style={{ color: m.titleColor || undefined }}>
+//                     {m.name}
+//                   </p>
+//                   <p className={styles.leaderRole} style={{ color: m.roleColor || "var(--accent)" }}>
+//                     {m.role}
+//                   </p>
+//                   <p className={styles.leaderText} style={{ color: m.textColor || undefined }}>
+//                     {m.bio}
+//                   </p>
 //                 </li>
 //               ))}
 //             </ul>
@@ -330,13 +430,14 @@ import styles from "./Home.module.css";
 import TestimonialSection from "../components/TestimonialSection";
 import Newsletter from "../components/Newsletter";
 import FAQ from "../components/FAQ";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Home() {
   const { t } = useLanguage();
   const { searchTerm } = useSearch();
   const home = t.home;
   const navigate = useNavigate();
+  const { hash } = useLocation();               // ⬅️ listen to #hash
 
   const heroImages = [
     "/images/mu.jpg",
@@ -348,7 +449,7 @@ export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
 
-  /** ─── Services: autoplay → manual on click ───────────────────── */
+  // Services: autoplay → manual on click
   const [manualScroll, setManualScroll] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -358,9 +459,7 @@ export default function Home() {
   const [thumbX, setThumbX] = useState(0);
   const trackRef = useRef(null);
 
-  const enterManualMode = () => {
-    if (!manualScroll) setManualScroll(true);
-  };
+  const enterManualMode = () => { if (!manualScroll) setManualScroll(true); };
 
   const recalcThumb = () => {
     const wr = wrapperRef.current;
@@ -442,9 +541,8 @@ export default function Home() {
     window.addEventListener("touchmove", move, { passive: false });
     window.addEventListener("touchend", up, { once: true });
   };
-  /** ─────────────────────────────────────────────────────────────── */
 
-  /* hero rotator */
+  // hero rotator
   useEffect(() => {
     const id = setInterval(
       () => setCurrentImageIndex((p) => (p + 1) % heroImages.length),
@@ -453,14 +551,14 @@ export default function Home() {
     return () => clearInterval(id);
   }, []);
 
-  /* mobile flag */
+  // mobile flag
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 767);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  /* search highlight */
+  // search highlight
   useEffect(() => {
     if (!searchTerm) return;
     const regex = new RegExp(`(${searchTerm})`, "gi");
@@ -478,7 +576,7 @@ export default function Home() {
     });
   }, [searchTerm]);
 
-  /** ─── Back to Top ─────────────────────────────────────────────── */
+  // Back to Top
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 400);
@@ -492,7 +590,7 @@ export default function Home() {
   const leadershipTitle = home?.leadership?.title || "Our Leadership";
   const leadershipMembers = home?.leadership?.members || [];
 
-  /** ─── Testimony-style statements (About / Mission / Values / Purpose / Vision) ─── */
+  // Testimony-style statements
   const statements = useMemo(
     () =>
       [
@@ -516,13 +614,20 @@ export default function Home() {
     return () => clearInterval(id);
   }, [pauseStatements, statements.length]);
 
+  // ⬇️ Smooth-scroll to a section if URL has a hash (/#about or /#mission)
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.querySelector(hash);
+    if (el) {
+      // slight delay so layout settles
+      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    }
+  }, [hash]);
+
   return (
     <main id="top" className={styles.home}>
       {isMobile && (
-        <div
-          className={styles.donateBanner}
-          onClick={() => navigate("/donate")}
-        >
+        <div className={styles.donateBanner} onClick={() => navigate("/donate")}>
           {home.donateMessage}
         </div>
       )}
@@ -530,61 +635,75 @@ export default function Home() {
       <div className={styles.homeContainer}>
         {/* Hero */}
         <section className={styles.hero}>
-         <div className={styles.heroMainContent}>
-  <img
-    src={heroImages[currentImageIndex]}
-    alt="Supportive"
-    className={styles.heroImage}
-  />
+          <div className={styles.heroMainContent}>
+            <img
+              src={heroImages[currentImageIndex]}
+              alt="Supportive"
+              className={styles.heroImage}
+            />
+            {/* centered overlay */}
+            <div
+              className={styles.heroTextBlock}
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "grid",
+                placeItems: "center",
+                zIndex: 1,
+                pointerEvents: "none",
+                padding: "clamp(12px, 2vw, 24px)",
+                textAlign: "center",
+              }}
+            >
+              <div style={{ maxWidth: "min(92vw, 1100px)" }}>
+                <h1
+                  className={styles.wel}
+                  style={{
+                    margin: 0,
+                    lineHeight: 1.05,
+                    letterSpacing: ".02em",
+                    textTransform: "uppercase",
+                    filter: "drop-shadow(0 2px 10px rgba(0,0,0,.45))",
+                  }}
+                >
+                  {home.welcomeText}
+                </h1>
 
-  {/* centered overlay */}
-  <div
-    className={styles.heroTextBlock}
-    style={{
-      position: "absolute",
-      inset: 0,
-      display: "grid",
-      placeItems: "center",
-      zIndex: 1,
-      pointerEvents: "none", // keep image/links clickable beneath
-      padding: "clamp(12px, 2vw, 24px)",
-      textAlign: "center",
-    }}
-  >
-    <div style={{ maxWidth: "min(92vw, 1100px)" }}>
-      <h1
-        className={styles.wel}
-        style={{
-          margin: 0,
-          lineHeight: 1.05,
-          letterSpacing: ".02em",
-          textTransform: "uppercase",
-          filter: "drop-shadow(0 2px 10px rgba(0,0,0,.45))",
-        }}
-      >
-        {home.welcomeText}
-      </h1>
-
-      <p
-        style={{
-          margin: "10px auto 0",
-          fontWeight: 700,
-          fontSize: "clamp(1rem, 2.6vw, 1.55rem)",
-          lineHeight: 1.35,
-          textWrap: "balance",
-          color: "#f3f4f6",
-          textShadow: "0 2px 10px rgba(0,0,0,.45)",
-        }}
-      >
-        {home.description}
-      </p>
-    </div>
-  </div>
-</div>
+                <p
+                  style={{
+                    margin: "10px auto 0",
+                    fontWeight: 700,
+                    fontSize: "clamp(1rem, 2.6vw, 1.55rem)",
+                    lineHeight: 1.35,
+                    textWrap: "balance",
+                    color: "#f3f4f6",
+                    textShadow: "0 2px 10px rgba(0,0,0,.45)",
+                  }}
+                >
+                  {home.description}
+                </p>
+              </div>
+            </div>
+          </div>
 
           <div className={styles.testimonials}>
             <TestimonialSection />
           </div>
+        </section>
+
+        {/* ✅ About & Mission sections (targets for #about and #mission) */}
+        <section className={styles.aboutMission}>
+          <article id="about" className={`${styles.about} ${styles.anchorFix}`}>
+            <p className={styles.subTitle}>{home.aboutLabel || "About us"}</p>
+            <h2>{home.aboutTitle}</h2>
+            <p>{home.aboutDescription}</p>
+          </article>
+
+          <article id="mission" className={`${styles.mission} ${styles.anchorFix}`}>
+            <p className={styles.subTitle}>{home.missionLabel || "Mission"}</p>
+            <h2>{home.missionTitle}</h2>
+            <p>{home.missionDescription}</p>
+          </article>
         </section>
 
         {/* Statements (testimony style) */}
@@ -597,8 +716,7 @@ export default function Home() {
           <div className={styles.statementsHeader}>
             <h2>{home?.statementsTitle || "Who We Are"}</h2>
             <p className={styles.statementsSub}>
-              {home?.statementsSubtitle ||
-                ""}
+              {home?.statementsSubtitle || ""}
             </p>
           </div>
 
@@ -610,9 +728,7 @@ export default function Home() {
               {statements.map((s, i) => (
                 <article key={s.key ?? i} className={styles.statementSlide}>
                   <div className={styles.statementCard}>
-                    <div className={styles.statementBadge}>
-                      {/* small colored dot like a testimonial avatar */}
-                    </div>
+                    <div className={styles.statementBadge} />
                     <h3 className={styles.statementTitle}>{s.title}</h3>
                     <p className={styles.statementText}>{s.text}</p>
                   </div>
@@ -627,9 +743,7 @@ export default function Home() {
                 key={i}
                 role="tab"
                 aria-selected={statementIdx === i}
-                className={`${styles.statementDot} ${
-                  statementIdx === i ? styles.activeDot : ""
-                }`}
+                className={`${styles.statementDot} ${statementIdx === i ? styles.activeDot : ""}`}
                 onClick={() => setStatementIdx(i)}
               />
             ))}
@@ -647,8 +761,6 @@ export default function Home() {
                   key={m.name}
                   className={styles.leadershipItem}
                   style={{
-                    // You can pass these in home.leadership.members:
-                    // { cardColor, titleColor, roleColor, accentColor, textColor }
                     background: m.cardColor || undefined,
                     borderColor: m.cardColor ? `${m.cardColor}` : undefined,
                     "--accent": m.accentColor || undefined,
@@ -681,9 +793,7 @@ export default function Home() {
 
           <div
             ref={wrapperRef}
-            className={`${styles.serviceWrapper} ${
-              manualScroll ? styles.manualScroll : styles.hiddenScroll
-            }`}
+            className={`${styles.serviceWrapper} ${manualScroll ? styles.manualScroll : styles.hiddenScroll}`}
           >
             <div
               className={manualScroll ? styles.scroller : styles.scrollerMarquee}
@@ -695,11 +805,7 @@ export default function Home() {
                   <div className={styles.flipCard}>
                     <div className={styles.flipCardInner}>
                       <div className={styles.flipCardFront}>
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className={styles.serviceImage}
-                        />
+                        <img src={service.image} alt={service.title} className={styles.serviceImage} />
                         <h3>{service.title}</h3>
                       </div>
                       <div className={styles.flipCardBack}>
@@ -720,10 +826,7 @@ export default function Home() {
             >
               <div
                 className={styles.stickyThumb}
-                style={{
-                  width: `${thumbW}px`,
-                  transform: `translateX(${thumbX}px)`,
-                }}
+                style={{ width: `${thumbW}px`, transform: `translateX(${thumbX}px)` }}
                 onPointerDown={onThumbDown}
                 onTouchStart={onThumbDown}
               />
