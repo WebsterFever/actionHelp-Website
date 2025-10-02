@@ -96,9 +96,12 @@ const Footer = () => {
           <li>{t.quickLinks.advocacyUpdates}</li>
         </ul>
       </div>
-
+    
       <div className={styles.section}>
+        <Link to="/contact" className={styles.link}>
         <h4>{t.nav.contact}</h4>
+        </Link> 
+        
         <ul>
           <li>📞 (413) 749-4324</li>
           <li>📧 actionhelp24@gmail.com</li>

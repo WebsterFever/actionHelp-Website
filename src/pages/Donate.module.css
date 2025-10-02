@@ -1,48 +1,4 @@
-/* .container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: var(--card);
-  color: var(--text);
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  
-  box-sizing: border-box;
-  
-  margin: 45px auto;
-  margin-top: 140px;
-   animation: fadeInUp 1s ease forwards, bgCycle 10s infinite alternate;
-  background: linear-gradient(135deg, #242222, #3a2d2a);
-  background-size: 400% 400%;
-}
 
-@keyframes bgCycle {
-  0% {
-    background: linear-gradient(135deg, #170708, #0c0301);
-  }
-  25% {
-    background: linear-gradient(135deg, #08070b, #080608);
-  }
-  50% {
-    background: linear-gradient(135deg, #0d0e0d, #020405);
-  }
-  75% {
-    background: linear-gradient(135deg, #3f2f1b, #180f1b);
-  }
-  100% {
-    background: linear-gradient(135deg, #1f1201, #050404);
-  }
-}
-
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
-.contactSection {
-  animation: fadeInUp 1s ease forwards, bgCycle 10s infinite alternate, float 6s ease-in-out infinite;
-} */
 
 .container {
   max-width: 600px;
@@ -330,5 +286,17 @@
 @media (max-width: 1023px) {
   .container {
     margin-top: calc(var(--donate-header-h-mobile) + var(--donate-banner-h-mobile) + var(--donate-gap));
+  }
+}
+/* Pin the donate card near the top */
+.container {
+  /* desktop & large screens */
+  margin-top: 24px !important;  /* adjust to taste (16–32px is fine) */
+}
+
+/* phones & tablets — leave a bit more room for the red banner */
+@media (max-width: 1023px) {
+  .container {
+    margin-top: 130px !important; /* keep space for mobile banner/header */
   }
 }

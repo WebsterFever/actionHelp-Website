@@ -3355,3 +3355,851 @@
   .hero{ padding-top: 0 !important; margin-top: 0 !important; }
   .heroMainContent{ margin-top: 0 !important; }
 }
+/* === Leadership: bigger, mobile-first images (paste at END of file) === */
+
+/* Base: phones — make the headshots big and clear */
+.leadershipItem{
+  grid-template-columns: 112px 1fr !important; /* image | content */
+  align-items: center;
+}
+.leaderImg{
+  width: 112px !important;
+  height: 112px !important;
+  border-radius: 14px !important;
+  object-fit: cover;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+}
+
+/* Tiny phones: stack image on top if space is tight */
+@media (max-width: 360px){
+  .leadershipItem{
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto 1fr;
+    text-align: center;
+  }
+  .leaderImg{
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
+    margin-bottom: 8px;
+  }
+  .leaderName, .leaderRole, .leaderText{
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* Tablets: bump size further */
+@media (min-width: 720px){
+  .leadershipItem{
+    grid-template-columns: 128px 1fr !important;
+  }
+  .leaderImg{
+    width: 128px !important;
+    height: 128px !important;
+  }
+}
+
+/* Large desktops: comfortable, prominent portraits */
+@media (min-width: 1200px){
+  .leadershipItem{
+    grid-template-columns: 140px 1fr !important;
+  }
+  .leaderImg{
+    width: 140px !important;
+    height: 140px !important;
+  }
+}
+
+/* Optional: tighten text scale a hair so bigger photos don’t crowd */
+.leaderName{ font-size: 1.1rem !important; }
+.leaderRole{ font-size: 0.98rem !important; }
+.leaderText{ font-size: 1rem !important; line-height: 1.6 !important; }
+/* === Leadership Section Overrides (mobile-first) === */
+
+.leadershipList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Each card stacks image on top, then text */
+.leadershipItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Make the portrait bigger */
+.leaderImg {
+  width: 140px !important;   /* 🔑 big photo */
+  height: 140px !important;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Name directly under image */
+.leaderName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 6px 0 4px;
+  color: #111;
+}
+
+/* Role under the name */
+.leaderRole {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+/* Bio/description last */
+.leaderText {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+  margin: 0;
+}
+
+/* Tablets: grid 2 per row */
+@media (min-width: 600px) {
+  .leadershipList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .leaderImg {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}
+
+/* Desktop: grid 3 per row, larger photos */
+@media (min-width: 1024px) {
+  .leadershipList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .leaderImg {
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+/* === Leadership: bulletproof mobile fit (paste at END) === */
+
+/* 1) Single column on phones, sane gaps */
+.leadershipSection { padding: 16px 0 !important; }
+.leadershipList{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding-inline: 12px !important; /* keep cards away from edges */
+}
+
+/* 2) Card: vertical stack, no overflow */
+.leadershipItem{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 14px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+  background: var(--card, #fff) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08) !important;
+
+  /* keep card inside viewport on tiny phones */
+  width: 100% !important;
+  max-width: 520px !important;
+  margin-inline: auto !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* 3) Kill old grid placements that forced two columns */
+.leaderImg,
+.leaderName,
+.leaderRole,
+.leaderText{
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+
+/* 4) Big but fluid portrait (won’t overflow narrow phones) */
+.leaderImg{
+  /* grows with screen, but always a square */
+  width: clamp(120px, 42vw, 180px) !important;
+  height: clamp(120px, 42vw, 180px) !important;
+  border-radius: 14px !important;
+  object-fit: cover !important;
+  margin-bottom: 10px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12) !important;
+
+}
+
+/* 5) Typography under the image */
+.leaderName{
+  font-size: clamp(1.05rem, 3.8vw, 1.25rem) !important;
+  font-weight: 800 !important;
+  margin: 4px 0 2px !important;
+}
+.leaderRole{
+  font-size: clamp(.95rem, 3.4vw, 1.05rem) !important;
+  font-weight: 700 !important;
+  margin: 0 0 8px !important;
+  color: var(--accent, var(--primary)) !important;
+}
+.leaderText{
+  font-size: clamp(.92rem, 3.6vw, 1rem) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+/* 6) Ensure long names/bios never break layout */
+.leadershipItem *{
+  max-width: 100% !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+/* 7) Slightly larger on small tablets; still stacked */
+@media (min-width: 480px){
+  .leaderImg{
+    width: clamp(140px, 34vw, 200px) !important;
+    height: clamp(140px, 34vw, 200px) !important;
+  }
+}
+
+/* 8) Switch to 2 columns on tablets */
+@media (min-width: 720px){
+  .leadershipList{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+  .leaderImg{
+    width: clamp(150px, 26vw, 220px) !important;
+    height: clamp(150px, 26vw, 220px) !important;
+  }
+}
+
+/* 9) 3 columns on desktop, with comfortable portrait size */
+@media (min-width: 1024px){
+  .leadershipList{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .leaderImg{
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+/* === Leadership: image as full-width top banner === */
+.leadershipItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0; /* remove extra padding at top */
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Make the image occupy full width of the card */
+.leaderImg {
+  width: 100% !important;     /* full width */
+  height: auto !important;    /* keep aspect ratio */
+  max-height: 260px;          /* optional: limit so it doesn’t get too tall */
+  object-fit: cover;          /* fill area nicely */
+  display: block;
+}
+
+/* Text content below the image */
+.leaderName,
+.leaderRole,
+.leaderText {
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+/* === Leadership image: full-width banner + keep heads visible === */
+.leadershipItem{
+  padding: 0 !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  text-align: center !important;
+}
+
+/* Make image a full-width banner and bias the crop upward */
+.leaderImg{
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;         /* banner height; adjust if needed */
+  height: auto !important;
+  object-fit: cover !important;
+  object-position: center var(--face-y, 12%) !important; /* ⬅️ push crop UP */
+  display: block !important;
+  border-radius: 16px 16px 0 0 !important;  /* round only the top of the image */
+}
+
+/* Text block under the image */
+.leaderName, .leaderRole, .leaderText{
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 8px 14px !important;
+  margin: 0 !important;
+}
+
+.leaderName{ font-weight: 800; font-size: 1.12rem; margin-top: 6px !important; }
+.leaderRole{ font-weight: 700; font-size: 1rem; margin-top: 2px !important; color: var(--accent, var(--primary)) !important; }
+.leaderText{ font-size: .98rem; line-height: 1.6; margin: 8px 0 14px !important; }
+
+/* Optional: on very tall screens, show a bit more image height */
+@media (min-width: 1024px){
+  .leaderImg{ aspect-ratio: 16 / 9 !important; }
+}
+/* === Leadership Grid Balanced (2x2 for 4 leaders) === */
+
+/* Mobile: 1 per row */
+.leadershipList {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Tablet: 2 per row */
+@media (min-width: 600px) {
+  .leadershipList {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+/* Desktop: keep 2 per row (so 2x2 for 4 leaders) */
+@media (min-width: 1024px) {
+  .leadershipList {
+    grid-template-columns: repeat(2, 1fr) !important;
+    max-width: 1100px; /* optional: keeps grid centered */
+    margin: 0 auto;
+  }
+}
+
+/* Each leader card */
+.leadershipItem {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  border-radius: 14px;
+  background: #fff;
+  padding-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+/* Leadership card: banner shows whole portrait 
+./*leaderImg {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;   /* show the full image 
+  background: #fff;                  filler for empty space 
+  border-radius: 16px 16px 0 0 !important;
+  display: block;
+}*/
+/* === Desktop-only: imitate mobile image style for leaders === */
+@media (min-width: 1024px){
+  /* Balanced grid (2x2 for 4 leaders). Remove if you prefer 3 columns. */
+  .leadershipList{
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Card shell stays stacked and centered like mobile */
+  .leadershipItem{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    background-color: red;
+  }
+
+  /* 🔑 Image behaves like mobile on desktop:
+     - show the whole portrait (no head/beard cut)
+     - centered
+     - sits on top of the text
+  */
+  .leaderImg{
+    width: 100% !important;
+    max-width: 420px !important;          /* desktop portrait width, tweak if you want */
+    aspect-ratio: 4 / 3 !important;       /* same feel as mobile banner box */
+    height: auto !important;
+    object-fit: contain !important;       /* show entire image (no crop) */
+    object-position: 50% 50% !important;
+    background: #fff;                     /* letterbox color (matches card) */
+    display: block !important;
+    border-radius: 16px 16px 0 0 !important;
+    margin: 0 auto !important;
+    
+  
+
+  }
+
+  /* Text spacing like mobile */
+  .leaderName,
+  .leaderRole,
+  .leaderText{
+    padding: 10px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+/* === Desktop: remove blank side space on leader images === */
+@media (min-width: 1024px){
+  /* make the card stretch so the image can span edge-to-edge */
+  .leadershipItem{
+    align-items: stretch !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+  }
+
+  /* Mobile-like behavior on desktop, no aspect-ratio box */
+  .leaderImg{
+    width: 100% !important;       /* fill card width */
+    max-width: none !important;
+    height: auto !important;      /* keep natural aspect */
+    aspect-ratio: auto !important;/* <-- remove forced ratio (kills side gaps) */
+    object-fit: contain !important; /* no cropping of head/beard */
+    object-position: 50% 50% !important;
+    background: transparent !important; /* no letterbox fill */
+    display: block !important;
+    border-radius: 16px 16px 0 0 !important;
+    margin: 0 !important;
+  }
+
+  /* keep text the same */
+  .leaderName,
+  .leaderRole,
+  .leaderText{
+    padding: 10px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* === Leadership: clean, balanced, centered (CSS-only patch) === */
+
+/* center the whole section + heading */
+#leadership{
+  display:grid !important;
+  place-items:center !important;
+  padding: clamp(20px,4vw,48px) 0 !important;
+}
+#leadership .modalTitle{
+  text-align:center !important;
+  margin: 0 0 16px !important;
+}
+
+/* two tidy columns, centered */
+#leadership .leadershipList{
+  display:grid !important;
+  grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+  gap: clamp(20px, 3vw, 32px) !important;
+  width: min(980px, 92vw) !important;
+  margin: 0 auto !important;
+  justify-items: center !important;
+}
+
+/* card shell */
+#leadership .leadershipItem{
+  width: 100%;
+  max-width: 460px;                    /* stop the “giant” look */
+  background: var(--card, #fff);
+  color: var(--text, #0f172a);
+  border: 1px solid color-mix(in oklab, var(--text), transparent 88%);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.10);
+  padding: 16px;
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr; /* image, name, role, bio */
+  align-items: start;
+  overflow: hidden;
+
+  /* subtle entrance + hover polish */
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  animation: leaderFade .45s ease forwards;
+  animation-delay: var(--delay, 0ms);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+#leadership .leadershipItem:hover{
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 14px 32px rgba(2,6,23,.14);
+}
+
+/* image: fixed, classy height; no more huge banner */
+#leadership .leaderImg{
+  width: 100% !important;
+  height: 220px !important;            /* <- key: makes cards even */
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  margin: 0 0 12px !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,.10);
+}
+
+/* typography: professional scale */
+#leadership .leaderName{
+  margin: 0 0 4px !important;
+  font-weight: 800 !important;
+  font-size: 1.15rem !important;
+  color: var(--text, #0b1220) !important;
+}
+#leadership .leaderRole{
+  margin: 0 0 10px !important;
+  font-size: .95rem !important;
+  font-weight: 700 !important;
+  color: var(--accent, var(--primary)) !important;
+}
+#leadership .leaderText{
+  margin: 0 !important;
+  font-size: .98rem !important;
+  line-height: 1.6 !important;
+  color: color-mix(in oklab, var(--text, #0f172a), transparent 8%) !important;
+}
+
+/* gentle entrance */
+@keyframes leaderFade{
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* mobile: stack neatly */
+@media (max-width: 720px){
+  #leadership .leadershipList{ grid-template-columns: 1fr !important; }
+  #leadership .leadershipItem{ max-width: 560px; }
+}
+/* === Leadership: circular “main card” look (CSS-only, scoped) === */
+
+/* keep your grid as-is; just center the contents of each card */
+#leadership .leadershipItem{
+  display: grid !important;
+  grid-template-rows: auto auto auto 1fr;
+  justify-items: center;
+  text-align: center;
+  padding: clamp(16px, 2.5vw, 22px);
+  background: var(--card, #fff);
+  border-radius: 18px;                 /* card still rounded */
+  border: 1px solid color-mix(in oklab, var(--text), transparent 88%);
+  box-shadow: 0 10px 26px rgba(2,6,23,.10);
+  overflow: hidden;
+}
+
+/* make the portrait perfectly circular, centered, with a soft ring */
+#leadership .leaderImg{
+  width: clamp(140px, 18vw, 200px) !important;
+  aspect-ratio: 1 / 1 !important;      /* square -> circle */
+  border-radius: 999px !important;      /* circle */
+  object-fit: cover !important;
+  margin: 4px auto 12px !important;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.18),
+    0 0 0 6px color-mix(in oklab, var(--accent, var(--primary)), transparent 82%);
+  position: relative;
+  isolation: isolate;
+}
+
+/* subtle hover pulse for the circle (desktop only) */
+@media (hover: hover) and (pointer: fine){
+  #leadership .leaderImg{
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  #leadership .leaderImg:hover{
+    transform: scale(1.03);
+    box-shadow:
+      0 6px 20px rgba(0,0,0,.22),
+      0 0 0 8px color-mix(in oklab, var(--accent, var(--primary)), transparent 78%);
+  }
+}
+
+/* tidy, centered typography under the circle */
+#leadership .leaderName{
+  margin: 6px 0 2px !important;
+  font-weight: 800 !important;
+  font-size: clamp(1rem, 1.6vw, 1.2rem) !important;
+}
+#leadership .leaderRole{
+  margin: 0 0 10px !important;
+  font-weight: 700 !important;
+  color: var(--accent, var(--primary)) !important;
+  font-size: .95rem !important;
+}
+#leadership .leaderText{
+  margin: 0 !important;
+  font-size: .98rem !important;
+  line-height: 1.6 !important;
+  opacity: .95;
+  max-width: 56ch;                     /* keep bios readable */
+}
+
+/* small entrance animation just for the circle + text */
+#leadership .leadershipItem{
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  animation: leaderCircleIn .45s ease forwards;
+  animation-delay: var(--delay, 0ms);
+}
+@keyframes leaderCircleIn{
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* dark mode polish */
+:root[data-theme="dark"] #leadership .leaderImg{
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.5),
+    0 0 0 6px color-mix(in oklab, var(--accent, #60a5fa), transparent 84%);
+}
+/* === Leadership: 2-cards cross-fade/slide, auto-rotating === */
+.leaderCarousel{
+  /* layout: two across, responsive */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: clamp(12px, 2.5vw, 22px);
+  position: relative;
+  overflow: hidden;
+  --step: 4s;                 /* fallback if not set inline */
+  --cycle: calc(var(--step) * 6); /* long enough for many members */
+}
+
+.leaderCarousel .leadershipItem{
+  /* start hidden */
+  opacity: 0;
+  transform: translateY(18px) scale(.98);
+  will-change: opacity, transform, box-shadow, filter;
+
+  /* main cycle: each card takes a turn */
+  animation: leaderFade var(--cycle) linear infinite both,
+             floaty 7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * var(--step));
+  /* subtle card chrome */
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+
+/* offset the odd ones by half a step → two show at the same time */
+.leaderCarousel .leadershipItem:nth-child(odd){
+  animation-delay: calc(var(--i) * var(--step) + (var(--step) / 2));
+}
+
+/* nice hover focus */
+.leaderCarousel .leadershipItem:hover{
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 16px 36px rgba(0,0,0,.12);
+}
+
+/* accent glow (uses your inline --accent, falls back softly) */
+.leaderCarousel .leadershipItem::after{
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  pointer-events: none;
+  background: radial-gradient(60% 60% at 50% 0%,
+              color-mix(in oklab, var(--accent, #4f46e5) 35%, transparent) 0%,
+              transparent 70%);
+  opacity: .0;
+  transition: opacity .3s ease;
+}
+.leaderCarousel .leadershipItem:hover::after{ opacity: .35; }
+
+/* Images behave nicely in the new animation */
+.leaderCarousel .leaderImg{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  display: block;
+}
+
+/* === Keyframes ===
+   0-8%: fade in start; 10-45%: fully visible; 55-100%: fade out
+   Because odd items are delayed by 1/2 step, two are visible together. */
+@keyframes leaderFade{
+  0%, 8%   { opacity: 0; transform: translateY(18px) scale(.98); filter: saturate(.9); }
+  10%, 45% { opacity: 1; transform: translateY(0) scale(1);     filter: saturate(1); }
+  55%,100% { opacity: 0; transform: translateY(-12px) scale(.985); filter: saturate(.92); }
+}
+
+/* subtle float effect so the cards feel alive */
+@keyframes floaty{
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-4px) scale(1.003); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Pause animation when user hovers the section */
+#leadership:hover .leadershipItem{
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .leaderCarousel .leadershipItem,
+  #leadership:hover .leadershipItem{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile: stack to 1 across but keep the “two at a time” rhythm */
+@media (max-width: 640px){
+  .leaderCarousel{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Gap fix: tighter cross-fade + instant first pair === */
+
+/* Use a tighter keyframe so at least one card is always visible */
+@keyframes leaderFadeTight{
+  /* quick fade in */
+  0%, 3%   { opacity: 0; transform: translateY(14px) scale(.985); filter: saturate(.92); }
+  /* stay fully visible almost the whole step */
+  6%, 94%  { opacity: 1; transform: translateY(0) scale(1);        filter: saturate(1); }
+  /* quick fade out */
+  97%,100% { opacity: 0; transform: translateY(-8px) scale(.988);  filter: saturate(.95); }
+}
+
+/* swap animation to the tighter version (keeps your floaty effect) */
+.leaderCarousel .leadershipItem{
+  animation-name: leaderFadeTight, floaty !important;
+}
+
+/* Show something immediately on first paint:
+   make the first two leaders visible right away */
+.leaderCarousel .leadershipItem:nth-child(-n+2){
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation-delay: 0s, 0s !important; /* first cycle starts instantly */
+}
+
+/* Keep the “two at a time” rhythm but reduce overlap blanking */
+.leaderCarousel .leadershipItem:nth-child(odd){
+  /* half-step offset remains, but with a tiny negative nudge for seamless crossfade */
+  animation-delay: calc(var(--i) * var(--step) + (var(--step) / 2) - 120ms), 0s !important;
+}
+
+/* Optional: if you want the overall cycle faster without edits in JSX,
+   uncomment the next rule to shorten each step */
+/*
+.leaderCarousel{ --step: 3.2s !important; }
+*/
+/* === Leadership card size: smaller & tighter === */
+.leaderCarousel{
+  gap: clamp(8px, 1.8vw, 14px) !important;            /* tighter spacing */
+  padding-inline: clamp(4px, 1vw, 10px);
+}
+
+/* shrink each card while keeping two across */
+.leaderCarousel .leadershipItem{
+  max-width: clamp(220px, 40vw, 300px) !important;     /* narrower cards */
+  margin-inline: auto;
+  border-radius: 14px;
+}
+
+/* image smaller, avoid cropping */
+.leaderCarousel .leaderImg{
+  max-height: clamp(120px, 22vw, 160px) !important;
+  object-fit: contain !important;
+  border-radius: 14px 14px 0 0;
+}
+
+/* typography scale down */
+.leaderCarousel .leaderName{
+  font-size: clamp(.9rem, 2.4vw, 1.05rem) !important;
+  font-weight: 700;
+  margin: 8px 12px 2px;
+}
+.leaderCarousel .leaderRole{
+  font-size: clamp(.78rem, 2.2vw, .95rem) !important;
+  margin: 0 12px 6px;
+  opacity: .9;
+}
+.leaderCarousel .leaderText{
+  font-size: clamp(.78rem, 2vw, .92rem) !important;
+  line-height: 1.35;
+  margin: 0 12px 12px 12px;
+}
+
+/* slightly softer shadows on smaller cards */
+.leaderCarousel .leadershipItem{
+  box-shadow: 0 8px 18px rgba(0,0,0,.08) !important;
+}
+.leaderCarousel .leadershipItem:hover{
+  box-shadow: 0 12px 26px rgba(0,0,0,.12) !important;
+}
+
+/* Mobile: keep 1 column but still compact */
+@media (max-width: 640px){
+  .leaderCarousel{
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .leaderCarousel .leadershipItem{
+    max-width: 92% !important;
+  }
+  .leaderCarousel .leaderImg{
+    max-height: 150px !important;
+  }
+}
+/* === Leadership layout: 4-up on desktop, 2-up on tablet, 1-up on mobile === */
+
+/* Base (mobile first): 1 column */
+.leaderCarousel{
+  display: grid;
+  grid-template-columns: 1fr !important;
+  gap: clamp(8px, 1.8vw, 14px);
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 700px){
+  .leaderCarousel{
+    grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
+  }
+}
+
+/* Desktop: 4 columns in a single line */
+@media (min-width: 1024px){
+  .leaderCarousel{
+    grid-template-columns: repeat(4, minmax(200px, 1fr)) !important;
+    gap: clamp(10px, 1.6vw, 18px);
+  }
+  /* Let cards expand to fill the grid cells */
+  .leaderCarousel .leadershipItem{
+    max-width: none !important;
+    width: 100%;
+  }
+  /* Tweak image height so the row stays compact */
+  .leaderCarousel .leaderImg{
+    max-height: clamp(140px, 14vw, 180px) !important;
+    object-fit: cover;
+  }
+}

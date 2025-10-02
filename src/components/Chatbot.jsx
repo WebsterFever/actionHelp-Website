@@ -1,178 +1,3 @@
-// import React, { useState } from "react";
-// import styles from "./Chatbot.module.css";
-// import { useLanguage } from "../context/LanguageContext";
-
-// const Chatbot = () => {
-//   const { t } = useLanguage(); // access translations
-//   const [open, setOpen] = useState(false);
-//   const [messages, setMessages] = useState([
-//     { text: t.chatbot.welcome, sender: "bot" },
-//   ]);
-//   const [input, setInput] = useState("");
-
-//   const handleSend = () => {
-//     if (!input.trim()) return;
-
-//     const userText = input.toLowerCase();
-//     const responses = t.chatbot.responses;
-
-//     let botText = "";
-
-//     if (
-//       userText.includes("hello") ||
-//       userText.includes("hi") ||
-//       userText.includes("good morning") ||
-//       userText.includes("good night") ||
-//       userText.includes("bonjour")
-//     ) {
-//       botText = responses.greetings;
-//     } else if (userText.includes("help") || userText.includes("aide")) {
-//       botText = responses.help;
-//     } else if (userText.includes("immigration") || userText.includes("immigration")) {
-//       botText = responses.immigration;
-//     } else if (userText.includes("bye") || userText.includes("au revoir")) {
-//       botText = responses.bye;
-//     } else {
-//       botText = responses.default;
-//     }
-
-//     setMessages((prev) => [
-//       ...prev,
-//       { text: input, sender: "user" },
-//       { text: botText, sender: "bot" },
-//     ]);
-
-//     setInput("");
-//   };
-
-//   return (
-//     <div className={styles.chatbotContainer}>
-//       <button onClick={() => setOpen(!open)} className={styles.toggleButton}>
-//         {open ? t.chatbot.toggleClose : t.chatbot.toggleOpen}
-//       </button>
-
-//       {open && (
-//         <div className={styles.chatWindow}>
-//           <div className={styles.messages}>
-//             {messages.map((msg, idx) => (
-//               <div key={idx} className={styles[msg.sender]}>
-//                 {msg.text}
-//               </div>
-//             ))}
-//           </div>
-//           <div className={styles.inputArea}>
-//             <input
-//               type="text"
-//               value={input}
-//               onChange={(e) => setInput(e.target.value)}
-//               placeholder={t.chatbot.placeholder}
-//               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-//             />
-//             <button onClick={handleSend}>{t.chatbot.send}</button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Chatbot;
-// import React, { useState } from "react";
-// import styles from "./Chatbot.module.css";
-// import { useLanguage } from "../context/LanguageContext";
-
-// const Chatbot = () => {
-//   const { t } = useLanguage(); // access translations
-//   const [open, setOpen] = useState(false);
-//   const [messages, setMessages] = useState([
-//     { text: t.chatbot.welcome, sender: "bot" },
-//   ]);
-//   const [input, setInput] = useState("");
-
-//   const handleSend = () => {
-//     if (!input.trim()) return;
-
-//     const userText = input.toLowerCase();
-//     const responses = t.chatbot.responses;
-
-//     let botText = "";
-
-//     if (
-//       userText.includes("hello") ||
-//       userText.includes("hi") ||
-//       userText.includes("good morning") ||
-//       userText.includes("good night") ||
-//       userText.includes("bonjour")
-//     ) {
-//       botText = responses.greetings;
-//     } else if (userText.includes("help") || userText.includes("aide")) {
-//       botText = responses.help;
-//     } else if (userText.includes("immigration")) {
-//       botText = responses.immigration;
-//     } else if (userText.includes("bye") || userText.includes("au revoir")) {
-//       botText = responses.bye;
-//     } else {
-//       botText = responses.default;
-//     }
-
-//     setMessages((prev) => [
-//       ...prev,
-//       { text: input, sender: "user" },
-//       { text: botText, sender: "bot" },
-//     ]);
-
-//     setInput("");
-//   };
-
-//   return (
-//     <div className={styles.chatbotContainer}>
-//       {/* Floating toggle button */}
-//       <button onClick={() => setOpen(!open)} className={styles.toggleButton}>
-//         {open ? t.chatbot.toggleClose : t.chatbot.toggleOpen}
-//       </button>
-
-//       {/* Chat window */}
-//       {open && (
-//         <div className={styles.chatWindow}>
-//           {/* Header with close button */}
-//           <div className={styles.chatHeader}>
-//             <span>{t.chatbot.title || "Chatbot"}</span>
-//             <button
-//               className={styles.closeButton}
-//               onClick={() => setOpen(false)}
-//               aria-label="Close chat"
-//             >
-//               ×
-//             </button>
-//           </div>
-
-//           {/* Messages */}
-//           <div className={styles.messages}>
-//             {messages.map((msg, idx) => (
-//               <div key={idx} className={styles[msg.sender]}>
-//                 {msg.text}
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Input */}
-//           <div className={styles.inputArea}>
-//             <input
-//               type="text"
-//               value={input}
-//               onChange={(e) => setInput(e.target.value)}
-//               placeholder={t.chatbot.placeholder}
-//               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-//             />
-//             <button onClick={handleSend}>{t.chatbot.send}</button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Chatbot;
 import React, { useState } from "react";
 import styles from "./Chatbot.module.css";
 import { useLanguage } from "../context/LanguageContext";
@@ -196,7 +21,6 @@ const Chatbot = () => {
     setOpen(true);
     setUnread(0); // user has seen messages
   };
-
   const closeChat = () => setOpen(false);
 
   const handleSend = () => {
@@ -217,59 +41,61 @@ const Chatbot = () => {
       botText = responses.bye || botText;
     }
 
-    // append user + bot messages
     setMessages((prev) => [...prev, { text }, { text: botText, sender: "bot" }]);
-
-    // if the window is closed when bot replies, bump unread
     if (!open) setUnread((u) => u + 1);
-
     setInput("");
   };
 
+  // pre-resolve labels once for readability
+  const openLabelLong = t.chatbot?.toggleOpen || "Chat with us";
+  const openLabelShort = t.chatbot?.toggleOpenShort || openLabelLong || "Chat with us";
+  const closeLabel = t.chatbot?.toggleClose || "Close chat";
+
   return (
     <div className={`${styles.chatbotContainer} ${open ? styles.open : ""}`}>
-      {/* Toggle button (hidden when open) with unread badge */}
+      {/* Floating toggle (hidden when open) */}
       {!open && (
-        <button
-          type="button"
-          className={styles.toggleButton}
-          onClick={openChat}
-          aria-label={
-            unread > 0
-              ? `${unread} ${t.chatbot?.newMessage || "new messages"}. ${
-                  t.chatbot?.toggleOpen || "Open chat"
-                }`
-              : t.chatbot?.toggleOpen || "Open chat"
-          }
-          title={t.chatbot?.toggleOpen || "Open chat"}
-        >
-          💬
-          {unread > 0 && (
-            <span className={styles.badge} aria-hidden="true">
-              {unread}
-            </span>
-          )}
-        </button>
+        <div className={styles.fabWrap}>
+          <button
+            type="button"
+            className={styles.toggleButton}
+            onClick={openChat}
+            aria-label={
+              unread > 0
+                ? `${unread} ${t.chatbot?.newMessage || "new messages"}. ${openLabelLong}`
+                : openLabelLong
+            }
+            title={openLabelLong}
+          >
+            💬
+            {unread > 0 && <span className={styles.badge}>{unread}</span>}
+          </button>
+
+          {/* Desktop & Mobile label (clean text) */}
+          <span
+            className={styles.fabLabel}
+            role="button"
+            tabIndex={0}
+            onClick={openChat}
+            onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openChat()}
+          >
+            {openLabelShort}
+          </span>
+        </div>
       )}
 
+      {/* Chat window */}
       {open && (
-        <div
-          className={styles.chatWindow}
-          role="dialog"
-          aria-label={t.chatbot?.title || ""}
-        >
-          {/* Close at the top-right */}
+        <div className={styles.chatWindow} role="dialog" aria-label={t.chatbot?.title || ""}>
           <button
             type="button"
             className={styles.closeTop}
             onClick={closeChat}
-            aria-label={t.chatbot?.toggleClose || "Close chat"}
-            title={t.chatbot?.toggleClose || "Close chat"}
+            aria-label={closeLabel}
+            title={closeLabel}
           >
             ×
           </button>
-
-          
 
           <div className={styles.messages}>
             {messages.map((msg, i) => (

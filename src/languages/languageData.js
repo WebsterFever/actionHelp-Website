@@ -61,19 +61,19 @@ export const languageData = {
         },
         {
           title: "Certified Nursing Assistant (CNA)",
-          image: "/images/job.jpg",
+          image: "/images/ceritified.jpg=ws1280x960",
           description:
             "Get certified and start a career in healthcare."
         },
         {
           title: "Home Health Aide (HHA)",
-          image: "/images/job.jpg",
+          image: "/images/home.jpg",
           description:
             "Training for rewarding jobs in home care."
         },
         {
           title: "Culinary Program",
-          image: "/images/job.jpg",
+          image: "/images/culinary.jpg",
           description:
             "Learn professional cooking skills for careers in the food industry."
         },
@@ -124,18 +124,19 @@ export const languageData = {
               "A former lawyer and sociologist from Haiti, currently pursuing a Doctorate in Business Administration (DBA). He brings 5+ years of experience with the United Nations, supporting communities at multiple levels. His expertise includes risk & disaster management, business and nonprofit administration, and information technology."
           },
           {
-            name: "Mivida Domercant",
-            role: "Secretary",
-            image: "/images/midiva.jpg",
-            bio:
-              "A multilingual interpreter, legal professional, and educator. With a legal background from Haiti, U.S. paralegal certification, and a Master’s in Education, she focuses on breaking language barriers and creating educational content for immigrants and underserved communities."
-          },
-          {
             name: "Marie Ange Laroche",
             role: "Vice President",
             image: "/images/laroche.jpg",
             bio:
               "Experienced paralegal committed to justice and community empowerment. Fluent in English, French, and Haitian Creole, she supports the Haitian community with culturally sensitive legal assistance."
+          },
+          {
+            name: "Mivida Domercant",
+            role: "Secretary",
+            image: "/images/midiva.jpg",
+            bio:
+              "A multilingual interpreter, legal professional, and educator. With a legal background from Haiti, U.S. paralegal certification, and a Master’s in Education, she focuses on breaking language barriers and creating educational content for immigrants and underserved communities."
+
           },
           {
             name: "Gelin Delva",
@@ -145,7 +146,11 @@ export const languageData = {
               "International Physician and Public Health Specialist with 10+ years across hospitals, nonprofits, and global organizations like the UN. Now in the U.S., he supports immigrant communities through consulting and career advising, with expertise in clinical research and program management."
           }
         ]
-      }
+
+      },
+
+      statementsTitle: "Who We Are",
+      statementsSubtitle: "Our mission, vision, and values",
     },
 
     contact: {
@@ -235,6 +240,7 @@ export const languageData = {
     menuSections: { blog: "📌 Blog", services: "🛠 Services" },
     bigTitle: { about: "ABOUT US", mission: "MISSION & VISION" },
     read: { readMore: "Read More" },
+
   },
 
   /* ===================== FRENCH ===================== */
@@ -359,18 +365,19 @@ export const languageData = {
               "Ancien avocat et sociologue d’Haïti, actuellement en doctorat (DBA). Plus de 5 ans d’expérience avec l’ONU. Domaines : gestion des risques et catastrophes, administration (entreprise & association) et technologies de l’information."
           },
           {
-            name: "Mivida Domercant",
-            role: "Secrétaire",
-            image: "/images/midiva.jpg",
-            bio:
-              "Interprète multilingue, professionnelle du droit et enseignante. Formation juridique en Haïti, certification de parajuriste aux États-Unis et master en éducation. Elle crée des ressources éducatives et aide les communautés à comprendre leurs droits."
-          },
-          {
             name: "Marie Ange Laroche",
             role: "Vice-présidente",
             image: "/images/laroche.jpg",
             bio:
               "Parajuriste expérimentée engagée pour la justice et l’autonomisation. Trilingue (anglais, français, créole haïtien), elle soutient la communauté haïtienne avec un accompagnement culturellement adapté."
+          },
+          {
+            name: "Mivida Domercant",
+            role: "Secrétaire",
+            image: "/images/midiva.jpg",
+            bio:
+              "Interprète multilingue, professionnelle du droit et enseignante. Formation juridique en Haïti, certification de parajuriste aux États-Unis et master en éducation. Elle crée des ressources éducatives et aide les communautés à comprendre leurs droits."
+
           },
           {
             name: "Gelin Delva",
@@ -380,7 +387,9 @@ export const languageData = {
               "Médecin et spécialiste de santé publique avec plus de 10 ans d’expérience (hôpitaux, ONG, ONU). Accompagne les immigrants par le conseil, l’orientation professionnelle et la gestion de programmes."
           }
         ]
-      }
+      },
+      statementsTitle: "Qui nous sommes",
+      statementsSubtitle: "Notre mission, vision et valeurs",
     },
 
     contact: {
@@ -594,19 +603,19 @@ export const languageData = {
               "Exabogado y sociólogo de Haití, cursando un DBA. Más de 5 años de experiencia con la ONU. Áreas: gestión de riesgos y desastres, administración de ONG y tecnología."
           },
           {
-            name: "Mivida Domercant",
-            role: "Secretaria",
-            image: "/images/midiva.jpg",
-            bio:
-              "Intérprete multilingüe, profesional legal y educadora. Con formación jurídica en Haití, certificación de paralegal en EE. UU. y maestría en educación, crea recursos educativos y rompe barreras de idioma."
-          },
-          {
             name: "Marie Ange Laroche",
             role: "Vicepresidenta",
             image: "/images/laroche.jpg",
             bio:
               "Paralegal con amplia experiencia y compromiso con la comunidad. Trilingüe (inglés, francés y criollo haitiano), brinda apoyo legal culturalmente sensible."
           },
+          {
+            name: "Mivida Domercant",
+            role: "Secretaria",
+            image: "/images/midiva.jpg",
+            bio:
+              "Intérprete multilingüe, profesional legal y educadora. Con formación jurídica en Haití, certificación de paralegal en EE. UU. y maestría en educación, crea recursos educativos y rompe barreras de idioma."
+            },
           {
             name: "Gelin Delva",
             role: "Tesorero",
@@ -615,7 +624,9 @@ export const languageData = {
               "Médico y especialista en salud pública con más de 10 años (hospitales, ONG, ONU). Apoya a comunidades inmigrantes con consultoría, orientación profesional y gestión de programas."
           }
         ]
-      }
+      },
+      statementsTitle: "Quiénes somos",
+      statementsSubtitle: "Nuestra misión, visión y valores",
     },
 
     contact: {
@@ -829,18 +840,19 @@ export const languageData = {
               "Ansien avoka ak sosyològ Ayiti, ap pouswiv yon DBA. Plis pase 5 ane eksperyans ak Nasyonzini. Zòn ekspètiz: jesyon risk ak dezas, administrasyon ONG ak teknoloji enfòmasyon."
           },
           {
-            name: "Mivida Domercant",
-            role: "Sekretè",
-            image: "/images/midiva.jpg",
-            bio:
-              "Entèprèt pliriling, pwofesyonèl legal ak edikatè. Li kraze baryè lang epi li kreye resous edikatif pou kominote imigran yo."
-          },
-          {
-            name: "Marie Ange Laroche",
+           name: "Marie Ange Laroche",
             role: "Vis Prezidan",
             image: "/images/laroche.jpg",
             bio:
               "Paralegal ki gen eksperyans, angaje pou jistis ak otorizasyon kominote a. Pale anglè, franse, ak kreyòl ayisyen."
+          },
+          {
+             name: "Mivida Domercant",
+            role: "Sekretè",
+            image: "/images/midiva.jpg",
+            bio:
+              "Entèprèt miltilang, pwofesyonèl legal ak edikatè. Li kraze baryè lang epi li kreye resous edikatif pou kominote imigran yo."
+            
           },
           {
             name: "Gelin Delva",
@@ -850,7 +862,9 @@ export const languageData = {
               "Doktè ak espesyalis sante piblik ak plis pase 10 ane eksperyans (lopital, ONG, Nasyonzini). Sipòte kominote imigran yo ak konsèy ak oryantasyon pwofesyonèl."
           }
         ]
-      }
+      },
+      statementsTitle: "Kiyès nou ye",
+      statementsSubtitle: "Misyon, vizyon, ak valè nou",
     },
 
     contact: {

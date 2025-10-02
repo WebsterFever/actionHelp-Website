@@ -46,3 +46,26 @@
 .link:hover {
   text-decoration: underline;
 }
+
+
+/* Flashing effect for the footer "Contact" header */
+@keyframes flashFooterContact {
+  0%, 100% {
+    color: var(--primary);
+    background: transparent;
+    text-shadow: none;
+  }
+  50% {
+    color: #fff;
+    background: var(--primary);
+    box-shadow: 0 0 14px rgba(0,0,0,.12);
+  }
+}
+
+/* Target the h4 inside the Link */
+.link h4 {
+  display: inline-block;          /* so padding/background show nicely */
+  padding: 2px 8px;
+  border-radius: 6px;
+  animation: flashFooterContact 1.2s infinite;
+}
